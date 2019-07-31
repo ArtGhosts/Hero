@@ -7,6 +7,11 @@ import router from './router'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
+
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
 new Vue({
   el: '#app',
   router,
