@@ -98,8 +98,8 @@
           //    获取所有城市
           Vue.axios.get("https://elm.cangdu.org/v1/cities?type=group").then((result)=>{
             console.log(result.data);
-            let a=this.upperSort(result.data)
-            console.log(a)
+            let a=this.upperSort(result.data);
+            console.log(a);
             this.upperA=a
         })
         }

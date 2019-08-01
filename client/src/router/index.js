@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 
-Vue.use(Router)
+Vue.use(Router);
 
 //登陆页面
 import  login  from "../components/login_nj"
@@ -18,5 +18,7 @@ export default new Router({
     {path:"/login",component:login},
     {path:'/searchCity/:cityID',component:SearchCity,name:"city"},
     {path:'/fastFood',component:FastFood},
+    {path:'/seachCity',component:SearchCity},
+
   ]
 })
