@@ -16,7 +16,7 @@ Vue.use(VueAxios, axios);
 //引入reset.css文件
 import '@/assets/css/reset.css'
 //引入resize.js文件
-// import '@/assets/js/resize.js'
+import '@/assets/js/resize.js'
 
 //引入vantUI组件
 import Vant from 'vant';

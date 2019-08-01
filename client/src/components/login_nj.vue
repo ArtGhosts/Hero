@@ -51,8 +51,6 @@
       <button class="btn btn-success btn-group btn-block" @click="isShow=false">确认</button>
     </div>
   </div>
-
-  </div>
 </template>
 
 <script>
