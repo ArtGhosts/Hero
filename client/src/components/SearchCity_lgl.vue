@@ -32,9 +32,9 @@
     name: "SearchCity_lgl",
     data(){
       return{
-        inputRef:"",
+
         //搜索城市
-        CitySearch:"",
+
       }
 
     },
@@ -49,7 +49,7 @@
       }
     },
     created(){
-      Vue.axios.get ("https://elm.cangdu.org/v1/pois?city_id=43&keyword=郑州").then((result)=>{
+      Vue.axios.get ("https://elm.cangdu.org/v1/pois?city_id=&keyword=郑州").then((result)=>{
         this.CitySearch=result.data;
         console.log(result.data);
       }).catch((err)=>{
@@ -64,8 +64,8 @@
     border: 1px solid rgba(232, 232, 232, 0.5);
     box-sizing: border-box;
     /*text-align:center;*/
-    font-size: 1em;
-    height: 2.7em;
+    font-size: 1rem;
+    height: 2.7rem;
     border-radius: 4px;
     color: #6a6f77;
     -moz-appearance: none;
