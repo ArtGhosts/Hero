@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 
-Vue.use(Router)
+Vue.use(Router);
 
 //登陆页面
 import  login  from "../components/login_nj"
@@ -13,6 +13,7 @@ export default new Router({
     {path:"/",component:Home},
     {path:"/login",component:login},
     {path:'/seachCity',component:SearchCity},
+
 
   ]
 })
