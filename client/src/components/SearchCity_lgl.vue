@@ -1,12 +1,13 @@
 <template>
 
-  <div>
+  <div class="search">
     <!--顶部页面-->
     <div>
     <van-nav-bar title="" style="background: royalblue" left-arrow>
       <span name="arrow-left" @click="asd" style="color: white"><</span>
       <span name="search" slot="right" @click="asd" style="color: white">切换城市</span>
     </van-nav-bar>
+      <span class="cityNa">{{cityN}}</span>
     </div>
 <!--中部页面-->
     <div>
@@ -32,6 +33,11 @@
     name: "SearchCity_lgl",
     data(){
       return{
+
+        //home页传过来的城市id和城市名
+        cityI:"",
+        cityN:"",
+        //输入框的值
         inputRef:"",
         //搜索城市
         CitySearch:"",
@@ -43,13 +49,15 @@
         console.log(this.inputRef);
       },
       asd() {
-        this.$router.push({
-          path: '/'
-        });
-      }
+        this.$router.push({path: '/'});
+      },
+
     },
     created(){
-      Vue.axios.get ("https://elm.cangdu.org/v1/pois?city_id=43&keyword=郑州").then((result)=>{
+      this.cityI=this.$route.params.cityID;
+      this.cityN=this.$route.params.cityName;
+      console.log( this.cityI,this.cityN);
+      Vue.axios.get ("https://elm.cangdu.org/v1/pois?city_id=this.cityI&keyword=this.cityN").then((result)=>{
         this.CitySearch=result.data;
         console.log(result.data);
       }).catch((err)=>{
@@ -59,18 +67,21 @@
   }
 </script>
 <style scoped>
+  .search i{
+    color:white;
+  }
   /*百度搜的*/
   input[type="text"] {
     border: 1px solid rgba(232, 232, 232, 0.5);
     box-sizing: border-box;
     /*text-align:center;*/
-    font-size: 1em;
-    height: 2.7em;
+    font-size: 1rem;
+    height: 2.7rem;
     border-radius: 4px;
     color: #6a6f77;
     -moz-appearance: none;
     outline: 0;
-    padding: 0 1em;
+    padding: 0 1rem;
     text-decoration: none;
     width: 100%;
   }
@@ -79,6 +90,16 @@
     color: white;
     background: royalblue;
     line-height: 2.85rem;
+    position: relative;
+  }
+  .cityNa{
+    display: inline-block;
+    width: 3rem;
+    position: absolute;
+    top:1rem;
+    left:43%;
+    color:white;
+    z-index: 10;
   }
 
 </style>
