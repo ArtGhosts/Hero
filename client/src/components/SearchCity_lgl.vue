@@ -3,11 +3,21 @@
   <div class="search">
     <!--顶部页面-->
     <div>
-    <van-nav-bar title="" style="background: royalblue" left-arrow>
-      <span name="arrow-left" @click="asd" style="color: white"><</span>
+      <!--<van-nav-bar-->
+        <!--right-text="按钮"-->
+        <!--left-arrow-->
+        <!--@click-left="onClickLeft"-->
+        <!--@click-right="onClickRight"-->
+      <!--/>-->
+
+
+
+    <van-nav-bar left-arrow @click-left="asd"
+                 @click-right="asd" style="background: royalblue">
+      <!--<span name="arrow-left" @click="asd" style="color: white"><</span>-->
       <span name="search" slot="right" @click="asd" style="color: white">切换城市</span>
-    </van-nav-bar>
       <span class="cityNa">{{cityN}}</span>
+      </van-nav-bar>
     </div>
 <!--中部页面-->
     <div>
@@ -48,6 +58,13 @@
 
     },
     methods: {
+          // onClickLeft() {
+          //   Toast('返回');
+          // },
+          // onClickRight() {
+          //   Toast('按钮');
+          // },
+
       input_L(){
         console.log(this.inputRef);
       },
