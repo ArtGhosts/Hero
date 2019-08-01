@@ -1,7 +1,7 @@
 
 <template>
   <div id="app">
-<Home></Home>
+   <RouterView></RouterView>
   </div>
 </template>
 
@@ -18,10 +18,13 @@ export default {
   *{
     padding: 0;
     margin: 0;
+    list-style: none;
   }
 
 body,html{
  width: 100%;
   height: 100%;
+  font-size: 1rem;
+  background:#f5f5f5;
 }
 </style>

@@ -11,7 +11,18 @@ Vue.config.productionTip = false
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
+
+//引入reset.css文件
+import '@/assets/css/reset.css'
+//引入resize.js文件
+// import '@/assets/js/resize.js'
+
+//引入vantUI组件
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 new Vue({
   el: '#app',
   router,
