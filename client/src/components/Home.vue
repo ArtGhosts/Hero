@@ -17,8 +17,8 @@
 
       <!--当前城市-->
       <div class="cityTxt">
-        <router-link :to="{}" class="cityLink">
-          {{currentCity}}
+        <router-link :to="{name:'city',params:{cityID:currentCity.id,cityName:currentCity.name}}" class="cityLink">
+          {{currentCity.name}}
           <span class="pull-right jiantou">></span>
         </router-link>
       </div>
@@ -28,7 +28,7 @@
         <h4>热门城市</h4>
         <div class="hot">
           <ul v-for="(val,index) in hotCity" :key="index">
-            <li class="pull-left"><router-link :to="{path:'/searchCity'}">{{val}}</router-link></li>
+            <li class="pull-left"><router-link :to="{name:'city',params:{cityID:val.id,cityName:val.name}}">{{val.name}}</router-link></li>
           </ul>
         </div>
       </div>
@@ -55,7 +55,7 @@
       data(){
           return{
             //当前城市
-            currentCity:"",
+            currentCity:{},
           //  热门城市
             hotCity:[],
           //  所有城市头字母大写
@@ -80,7 +80,8 @@
         created(){
           //获取当前城市
           Vue.axios.get("https://elm.cangdu.org/v1/cities?type=guess").then((result)=>{
-            this.currentCity=result.data.name
+            this.currentCity={name:result.data.name,id:result.data.id}
+            console.log(result.data.id,result.data.name,this.currentCity);
           }).catch((err)=>{
             console.log(err)
           });
@@ -88,7 +89,12 @@
           //获取热门城市
           Vue.axios.get("https://elm.cangdu.org/v1/cities?type=hot").then((result)=>{
             for(let i=0;i<result.data.length;i++){
-              this.hotCity.push(result.data[i].name)
+              let DN={
+                id:result.data[i].id,
+                name:result.data[i].name
+              };
+              this.hotCity.push(DN);
+              // console.log(this.hotCity)
             }
             // console.log(result.data,this.hotCity)
           }).catch((err)=>{
@@ -97,7 +103,7 @@
 
           //    获取所有城市
           Vue.axios.get("https://elm.cangdu.org/v1/cities?type=group").then((result)=>{
-            console.log(result.data);
+            // console.log(result.data);
             let a=this.upperSort(result.data);
             console.log(a);
             this.upperA=a
@@ -153,6 +159,7 @@
     background: white;
   }
   .cityLink{
+    width: 100%;
     color:#3190e8;
   }
   .jiantou{

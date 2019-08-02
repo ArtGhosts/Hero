@@ -10,13 +10,6 @@
         <span @click="asd" class="qhcs_L">切换城市</span>
       </div>
 
-    <van-nav-bar left-arrow @click-left="asd"
-                 @click-right="asd" style="background: royalblue">
-      <!--<span name="arrow-left" @click="asd" style="color: white"><</span>-->
-      <span name="search" slot="right" @click="asd" style="color: white">切换城市</span>
-      <span class="cityNa">{{cityN}}</span>
-      </van-nav-bar>
-
     </div>
     <!--中部页面-->
     <div>
@@ -83,7 +76,7 @@
       }
     },
     methods: {
-<<<<<<< HEAD
+
       // 清除历史纪录
       eliminate() {
         localStorage.clear(localStorage);
@@ -101,7 +94,8 @@
         }
       },
       //获取输入框内部的值
-      input_L() {
+
+
 
 
       input_L(){
@@ -190,15 +184,6 @@
 
 
   /*数据库首页传来的值的样式*/
-  .cityNa {
-
-  /*设置顶部页面的样式*/
-  /*.top {*/
-    /*color: white;*/
-    /*background: royalblue;*/
-    /*line-height: 2.85rem;*/
-    /*position: relative;*/
-  /*}*/
   .cityNa{
 
     display: inline-block;

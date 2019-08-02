@@ -1,6 +1,6 @@
 <template>
-    <div class="productpages">
-      <transition name="fade"  mode="out-in">
+    <div>
+      <transition name="fade" mode="out-in">
         <RouterView></RouterView>
       </transition>
       <Foot></Foot>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import FastFood from  '../components/FastFood'
+  import FastFood from './FastFood_dyx'
   import Foot from  '../components/Foot_dyx'
     export default {
         name: "ProductHome",

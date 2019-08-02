@@ -14,7 +14,7 @@ import ProductHome from  "@/components/ProductHome"
 
 import SearchCity from  "@/components/SearchCity_lgl"
 //外卖
-import FastFood from  "@/components/FastFood"
+import FastFood from  "@/components/FastFood_dyx"
 //搜索商品
 import SearchProduct from  "@/components/SearchProduct"
 //订单
