@@ -6,18 +6,28 @@
           <van-icon name="search" slot="left" />
         </van-nav-bar>
       </div>
-      <!--底部栏-->
-      <Foot></Foot>
+      <!--轮播图-->
+      <div calss="lunbo">
+        <swiper :options="swiperOption" ref="mySwiper">
+          <!-- slides -->
+          <swiper-slide><div>1</div></swiper-slide>
+          <swiper-slide><div>2</div></swiper-slide>
+          <!-- Optional controls -->
+          <div class="swiper-pagination"  slot="pagination"></div>
+        </swiper>
+      </div>
     </div>
 </template>
 
 <script>
-  import Foot from '../components/Foot_dyx'
     export default {
         name: "FastFood_dyx",
       data(){
           return{
             address:"杭州",
+            swiperOption:{
+              direction:'horizontal',
+            }
           }
       },
       methods: {
@@ -28,7 +38,6 @@
           this.$router.push({path:'/searchCity'});
         }
       },
-      components:{Foot}
     }
 </script>
 
@@ -42,4 +51,8 @@
   .head span, .head i{
     color: white;
   }
+  /*轮播*/
+ .lunbo{
+  width: 100%;
+}
 </style>

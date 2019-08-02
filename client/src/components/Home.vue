@@ -28,7 +28,7 @@
         <h4>热门城市</h4>
         <div class="hot">
           <ul v-for="(val,index) in hotCity" :key="index">
-            <li class="pull-left"><router-link :to="{path:'/seachCity'}">{{val}}</router-link></li>
+            <li class="pull-left"><router-link :to="{path:'/searchCity'}">{{val}}</router-link></li>
           </ul>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <li  v-for="(val,index) in upperA" :key="index" class="uppcity">
               <h4>{{index}}</h4>
               <ul v-for="(value,index) in val" :key="index" class="address">
-                  <li><router-link :to="{path:'/seachCity'}">{{value.name}}</router-link></li>
+                  <li><router-link :to="{name:'city',params:{cityID:value.id,cityName:value.name}}">{{value.name}}</router-link></li>
               </ul>
               <div class="clearfix"></div>
             </li>
@@ -108,8 +108,10 @@
 </script>
 
 <style scoped>
+
   /*ele.me部*/
 .top{
+
   color: white;
   background:royalblue;
   line-height:2.85rem;
