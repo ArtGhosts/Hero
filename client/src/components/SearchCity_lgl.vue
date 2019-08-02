@@ -3,20 +3,20 @@
   <div>
     <!--顶部页面-->
     <div class="search">
-<<<<<<< HEAD
+
       <div @click-right="asd" class="top_L">
         <van-icon name="arrow-left" @click="asd" class="vant_top"></van-icon>
         <span class="cityNa">{{cityN}}</span>
         <span @click="asd" class="qhcs_L">切换城市</span>
       </div>
-=======
+
     <van-nav-bar left-arrow @click-left="asd"
                  @click-right="asd" style="background: royalblue">
       <!--<span name="arrow-left" @click="asd" style="color: white"><</span>-->
       <span name="search" slot="right" @click="asd" style="color: white">切换城市</span>
       <span class="cityNa">{{cityN}}</span>
       </van-nav-bar>
->>>>>>> 7421058ffcddc0b4774e889e5e34182e46a65f1e
+
     </div>
     <!--中部页面-->
     <div>
@@ -102,10 +102,9 @@
       },
       //获取输入框内部的值
       input_L() {
-=======
+
 
       input_L(){
->>>>>>> 7421058ffcddc0b4774e889e5e34182e46a65f1e
         console.log(this.inputRef);
         //点击按钮之后搜索的值显示出来
         this.baba = true;
@@ -188,11 +187,11 @@
     padding: 0 1rem;
     text-decoration: none;
   }
-<<<<<<< HEAD
+
 
   /*数据库首页传来的值的样式*/
   .cityNa {
-=======
+
   /*设置顶部页面的样式*/
   /*.top {*/
     /*color: white;*/
@@ -201,7 +200,7 @@
     /*position: relative;*/
   /*}*/
   .cityNa{
->>>>>>> 7421058ffcddc0b4774e889e5e34182e46a65f1e
+
     display: inline-block;
     width: 3rem;
     position: absolute;
