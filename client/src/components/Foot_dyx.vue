@@ -35,7 +35,7 @@
       },
       methods:{
         changePage1(){
-          this.isShow=false;
+          // this.isShow=false;
           this.$router.push({path:"/fastFood"})
         },
         changePage2(){

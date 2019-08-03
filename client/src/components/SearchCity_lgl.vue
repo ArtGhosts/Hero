@@ -19,14 +19,14 @@
         <van-button type="info" @click="input_L" class="xxan_L">信息按钮</van-button>
       </div>
     </div>
-    <!--下部搜索页面-->
+    <!--下部历史记录页面-->
     <div v-if="mama" class="ssls_L">
       <span v-if="qingchulishi">搜索页面</span>
       <div>
         <ul>
-          <li v-for="(b,index) in shopping1" :key="index" class="ul_li_L">
-            <p>{{b.name}}</p>
-            <span>{{b.address}}</span>
+          <li v-for="(b,index) in shopping1" :key="index" class="ul_li_L" @click="changePage(index)">
+              <p>{{b.name}}</p>
+              <span>{{b.address}}</span>
           </li>
         </ul>
       </div>
@@ -80,10 +80,11 @@
       // 清除历史纪录
       eliminate() {
         localStorage.clear(localStorage);
+        this.shopping1=[]
       },
+
       //点击获取信息
       shopping(v) {
-
         let one = this.CitySearch[v];
         let result = this.shopping1.find((err) => {
           return err.name == one.name;
@@ -92,12 +93,17 @@
           this.shopping1.push(one);
           localStorage.setItem("name", JSON.stringify(this.shopping1))
         }
+
+      //  路由传值
+       this.$router.push({path:"/fastFood",query:{cityGeohash:this.CitySearch[v].geohash}})
+        console.log(this.CitySearch[v]);
       },
+      //路由传值
+      changePage(v){
+        this.$router.push({path:"/fastFood",query:{cityGeohash:this.shopping1[v].geohash}})
+      },
+
       //获取输入框内部的值
-
-
-
-
       input_L(){
         console.log(this.inputRef);
         //点击按钮之后搜索的值显示出来
@@ -185,7 +191,6 @@
 
   /*数据库首页传来的值的样式*/
   .cityNa{
-
     display: inline-block;
     width: 3rem;
     position: absolute;
@@ -231,7 +236,10 @@
   .ssls_L {
     line-height: 2rem
   }
-
+  .ssls_L ul>li>span{
+    font-size: 0.75rem;
+    color:#999;
+  }
   /*ul里面li的设置*/
   .ul_li_L {
     width: 100%;

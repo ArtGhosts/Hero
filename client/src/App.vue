@@ -1,7 +1,9 @@
 
 <template>
   <div id="app">
-   <RouterView></RouterView>
+    <transition name="fade" mode="out-in">
+      <RouterView></RouterView>
+    </transition>
   </div>
 </template>
 
@@ -27,4 +29,10 @@ body,html{
   font-size: 1rem;
   background:#f5f5f5;
 }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>

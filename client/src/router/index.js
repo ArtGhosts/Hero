@@ -6,6 +6,8 @@ Vue.use(Router);
 
 //登陆页面
 import  login  from "../components/login_nj"
+//重置
+import  resetPassword  from "../components/resetPassword_nj"
 //首页
 import Home from  "@/components/Home"
 //搜索城市
@@ -27,8 +29,9 @@ export default new Router({
     {path:"/",component:Home},
     //登录
     {path:"/login",component:login},
+    {path:'/resepassword',component:resetPassword},
     //搜索城市
-    {path:'/searchCity/:cityID',component:SearchCity,name:"city"},
+    {path:'/searchCity/:cityID/:cityName',component:SearchCity,name:"city"},
 
     //商品首页
     {path:'/pHome',component:ProductHome,children:[
