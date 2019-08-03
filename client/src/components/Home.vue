@@ -39,7 +39,7 @@
             <li  v-for="(val,index) in upperA" :key="index" class="uppcity">
               <h4>{{index}}</h4>
               <ul v-for="(value,index) in val" :key="index" class="address">
-                  <li><router-link :to="{name:'city',params:{cityID:value.id,cityName:value.name}}">{{value.name}}</router-link></li>
+                  <li><router-link :to="{name:'city',params:{cityID:value.id,cityName:value.name}}" >{{value.name}}</router-link></li>
               </ul>
               <div class="clearfix"></div>
             </li>
@@ -65,6 +65,7 @@
           }
       },
       methods:{
+
       //    字母排序
         upperSort(obj){
           let keys=Object.keys(obj).sort();
@@ -80,7 +81,7 @@
         created(){
           //获取当前城市
           Vue.axios.get("https://elm.cangdu.org/v1/cities?type=guess").then((result)=>{
-            this.currentCity={name:result.data.name,id:result.data.id}
+            this.currentCity={name:result.data.name,id:result.data.id};
             console.log(result.data.id,result.data.name,this.currentCity);
           }).catch((err)=>{
             console.log(err)

@@ -74,8 +74,6 @@ val.image_path" alt="">
 </template>
 
 <script>
-  import 'swiper/dist/css/swiper.css'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
   import Vue from 'vue'
     export default {
       name: "FastFood_dyx",

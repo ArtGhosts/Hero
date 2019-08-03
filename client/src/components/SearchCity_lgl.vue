@@ -6,7 +6,7 @@
 
       <div @click-right="asd" class="top_L">
         <van-icon name="arrow-left" @click="asd" class="vant_top"></van-icon>
-        <span class="cityNa">{{cityN}}</span>
+        <span class="cityNa" >{{cityN}}</span>
         <span @click="asd" class="qhcs_L">切换城市</span>
       </div>
 
@@ -58,6 +58,7 @@
         cityI: "",
         //传来的值
         cityN: "",
+        cityN_L: "",
         //输入框的值
         inputRef: "",
         CitySearch: [],
@@ -80,37 +81,44 @@
       // 清除历史纪录
       eliminate() {
         localStorage.clear(localStorage);
-        this.shopping1=[]
+        this.shopping1 = [];
+        this.qingchulishi = false;
+
       },
 
       //点击获取信息
       shopping(v) {
         let one = this.CitySearch[v];
+        console.log(this.CitySearch);
         let result = this.shopping1.find((err) => {
+          //如果全部内容里面的名字跟点击后获取的名字一样。
           return err.name == one.name;
         });
-        if(!result) {
+        //如果没有走上面的代码就运行这个
+        if (!result) {
           this.shopping1.push(one);
           localStorage.setItem("name", JSON.stringify(this.shopping1))
         }
 
-      //  路由传值
-       this.$router.push({path:"/fastFood",query:{cityGeohash:this.CitySearch[v].geohash}})
+        //  路由传值
+        this.$router.push({path: "/fastFood", query: {cityGeohash: this.CitySearch[v].geohash}})
         console.log(this.CitySearch[v]);
       },
       //路由传值
-      changePage(v){
-        this.$router.push({path:"/fastFood",query:{cityGeohash:this.shopping1[v].geohash}})
+      changePage(v) {
+        this.$router.push({path: "/fastFood", query: {cityGeohash: this.shopping1[v].geohash}})
       },
 
+      // console.log(this.shopping1)
+
       //获取输入框内部的值
-      input_L(){
+      input_L() {
         console.log(this.inputRef);
         //点击按钮之后搜索的值显示出来
         this.baba = true;
         //点击按钮之后搜索历史隐藏
         this.mama = false;
-        Vue.axios.get("https://elm.cangdu.org/v1/pois?city_id=cityI&keyword=" + this.inputRef).then((result) => {
+        Vue.axios.get("https://elm.cangdu.org/v1/pois?city_id=" + this.cityI + "&keyword=" + this.inputRef).then((result) => {
           this.CitySearch = result.data;
           console.log(result);
         }).catch((err) => {
@@ -129,21 +137,34 @@
       let one = JSON.parse(localStorage.getItem("name")) || {};
       this.shuzu.push(one);
       console.log(this.shuzu);
-
       //这是从首页传来的id值
       this.cityI = this.$route.params.cityID;
-      //这是从首页传来额name值
+      //这是从首页传来name值
       this.cityN = this.$route.params.cityName;
-      console.log(this.cityI, this.cityN);
+      // localStorage.setItem("fafa", JSON.stringify(cityN1));
+      if (this.cityI) {
+        JSON.stringify(localStorage.setItem("id1", this.cityI));
+      }
+      else {
+        this.cityI = JSON.parse(localStorage.getItem("id1"));
+      }
+      if (this.cityN) {
+        JSON.stringify(localStorage.setItem("name1", this.cityN));
+      }
+      else {
+        this.cityN = JSON.parse(localStorage.getItem("name1"));
+      }
+      console.log(this.cityN)
     },
     mounted() {
       this.shopping1 = JSON.parse(localStorage.getItem("name")) || [];
       console.log(this.shopping1);
-      if(this.shopping1.length > 0 || (this.inputRef == null)) {
+      if (this.shopping1.length > 0 || (this.inputRef == null)) {
         this.qingchulishi = true;
       }
     }
   }
+
 </script>
 <style scoped>
   /*顶部切换城市样式*/
