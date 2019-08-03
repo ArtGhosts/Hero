@@ -15,14 +15,17 @@ import ProductHome from  "@/components/ProductHome"
 
 
 import SearchCity from  "@/components/SearchCity_lgl"
-//外卖
+//外卖->食品分类
 import FastFood from  "@/components/FastFood_dyx"
+import FastFoodCategroy from  "@/components/FastFood_categroy_dyx"
+
 //搜索商品
 import SearchProduct from  "@/components/SearchProduct"
 //订单
 import ProductOrder from  "@/components/ProductOrder"
-//我的
+//我的->我的余额
 import Mine from  "@/components/Mine"
+import Balance from  "@/components/Mine_balance"
 export default new Router({
   routes: [
     //首页
@@ -38,12 +41,15 @@ export default new Router({
         {path:'/',redirect:"/fastFood"},
         //外卖
         {path:'/fastFood',component:FastFood},
+        {path:'/FastFoodCategroy',component:FastFoodCategroy},
         //搜索
         {path:'/searchProduct',component:SearchProduct},
         //订单
         {path:'/order',component:ProductOrder},
         //我的
         {path:'/mine',component:Mine},
+      //  我的余额
+        {path:'/balance',component:Balance},
       ]},
 
 

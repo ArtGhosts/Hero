@@ -3,7 +3,7 @@
   <div class="nav">
     <!--密码登录-->
     <div class="topnj">
-      <router-link :to="{path:'/'}"><span class="glyphicon glyphicon-menu-left pull-left" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
       <div class="denglu">
         密码登录
       </div>
@@ -39,7 +39,7 @@
     <div class="alert alert-warning text-center LmAlert bounceIn" v-if="isShow">
       <!--警告框的图标-->
       <img src="../assets/jinggaokuang.png" height="100" width="100"/>
-      <p>请输入手机号/邮箱/用户名</p>
+      <p>请输入账号/密码/验证码</p>
       <button class="btn btn-success btn-group btn-block" @click="isShow=false">确认</button>
     </div>
   </div>
@@ -100,7 +100,7 @@
             password:this.LmP,
             captcha_code:this.LmY
           }).then((res)=>{
-            this.loginReturn = res.data.message
+            this.loginReturn = res.data.message;
             if (this.loginReturn==='密码错误') {
               this.isShow=true;
             }else {
@@ -141,12 +141,17 @@
   }
   /*小蓝头*/
   .topnj{
-    /*height: 2.85rem;*/
     background-color:#3190e8;
     text-align: center;
-    line-height: 2.85rem
-  ;
+    line-height: 2.85rem;
   }
+  /*返回按钮*/
+  .back{
+    font-size: 1.4rem;
+    line-height: 2.856rem;
+    margin-left:.5rem;
+  }
+  /*登录头*/
   .denglu{
     color: white;
     font-size: 1.3rem;
@@ -161,6 +166,7 @@
   }
   .LmPass input{
     height: 3rem;
+    border-bottom: 0.0625rem solid #e4e4e4;
   }
   input{
     line-height: 2.3rem;

@@ -15,7 +15,7 @@
             <van-grid :column-num="4">
               <ul class="productCategory">
                 <li v-for="(val,index) in perProductCategory" :key="index">
-                  <router-link :to="{}">
+                  <router-link :to="{path:'/FastFoodCategroy',query:{}}">
                     <img :src="'https://fuss10.elemecdn.com/'+
                     val.image_url" alt="">
                     <p>{{val.title}}</p>
@@ -106,7 +106,7 @@ val.image_path" alt="">
         this.cityNa=this.$route.query.cityInfor;
         //获取商品分类轮播的信息
         Vue.axios.get("https://elm.cangdu.org/v2/index_entry").then((result)=>{
-          // console.log(result.data);
+          console.log(result.data);
           this.perProductCategory=result.data.slice(0,8);
           this.afterProductCategory=result.data.slice(8);
           // console.log(this.perProductCategory,this.afterProductCategory)
@@ -127,7 +127,7 @@ val.image_path" alt="">
         console.log(this.$route.query.cityGeohash);
         Vue.axios.get("https://elm.cangdu.org/v2/pois/"+this.$route.query.cityGeohash).then((result)=>{
           console.log(result.data);
-          this.cityNa=result.data.city
+          this.cityNa=result.data.name;
         }).catch((err)=>{
           console.log(err)
         })
@@ -159,7 +159,7 @@ val.image_path" alt="">
   color: white;
   z-index: 10;
   color: white;
-  font-size: 0.965rem;
+  font-size: 1.2rem;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
