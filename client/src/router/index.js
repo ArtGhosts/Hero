@@ -28,7 +28,7 @@ export default new Router({
     //登录
     {path:"/login",component:login},
     //搜索城市
-    {path:'/searchCity/:cityID',component:SearchCity,name:"city"},
+    {path:'/searchCity/:cityID/:cityName',component:SearchCity,name:"city"},
 
     //商品首页
     {path:'/pHome',component:ProductHome,children:[
