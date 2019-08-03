@@ -87,17 +87,18 @@
 
   /*小蓝头*/
   .topnj{
-    height: 2.85rem;
+    /*height: 2.85rem;*/
     background-color:#3190e8;
     text-align: center;
-    line-height: 2.856rem;
+    /*line-height: 2.856rem;*/
+    line-height: 2.9rem;
+
   }
   /*返回按钮*/
   .back{
     font-size: 1.4rem;
     line-height: 2.856rem;
     margin-left:.5rem;
-
   }
   .denglu{
     color: white;
@@ -111,7 +112,7 @@
   .njpassword input{
     height: 3rem;
   }
-  .njpassword input:nth-child(4){
+  .njpassword input:nth-child(3){
     margin-bottom: 0.05rem;
 
   }
