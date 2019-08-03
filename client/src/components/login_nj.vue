@@ -3,7 +3,7 @@
   <div class="nav">
     <!--密码登录-->
     <div class="topnj">
-      <router-link :to="{}"><span class="glyphicon glyphicon-menu-left pull-left" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/'}"><span class="glyphicon glyphicon-menu-left pull-left" style="color: white;"></span></router-link>
       <div class="denglu">
         密码登录
       </div>
@@ -31,13 +31,14 @@
       </div>
 
       <div></div>
-      <button class="btn btn-success btn-group btn-block " @click="login">登录</button>
+
+      <button class="btn btn-success btn-group btn-block enter " @click="login">登录</button>
     </div>
-    <router-link :to="{path:''}"><h6 class="text text-primary pull-right" style="margin-right:0.5rem ">重置密码?</h6></router-link>
+    <router-link :to="{path:'/resepassword'}"><h6 class="text text-primary pull-right" style="margin-right:0.5rem ">重置密码?</h6></router-link>
     <!--这是个警告框-->
     <div class="alert alert-warning text-center LmAlert bounceIn" v-if="isShow">
       <!--警告框的图标-->
-      <img src="../assets/logo.png" height="100" width="100"/>
+      <img src="../assets/jinggaokuang.png" height="100" width="100"/>
       <p>请输入手机号/邮箱/用户名</p>
       <button class="btn btn-success btn-group btn-block" @click="isShow=false">确认</button>
     </div>
@@ -162,7 +163,7 @@
     height: 3rem;
   }
   input{
-    line-height: 2rem;
+    line-height: 2.3rem;
     font-size: 0.7rem;
     width: 100%;
     border: 0;
@@ -226,5 +227,8 @@
     top: 10.3rem;
     right: 0.5rem;
   }
-
+  /*登录*/
+  .enter{
+    line-height: 2.3rem;
+  }
 </style>
