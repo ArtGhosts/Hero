@@ -73,7 +73,7 @@
           <span class="custom-title">我的订单</span>
         </template>
       </van-cell>
-      <van-cell  is-link :to="{path:'/'}">
+      <van-cell  is-link :to="{path:'/member'}">
         <template slot="title">
           <i class="iconfont VIPka">&#xe72d;</i>
           <span class="custom-title">饿了么会员卡</span>
@@ -82,13 +82,13 @@
     </div>
     <!--服务中心-->
     <div class="Service">
-      <van-cell  is-link :to="{path:'/'}">
+      <van-cell  is-link :to="{path:'/service'}">
         <template slot="title">
           <i class="iconfont blue">&#xe61a;</i>
           <span class="custom-title">服务中心</span>
         </template>
       </van-cell>
-      <van-cell  is-link :to="{path:'/'}">
+      <van-cell  is-link :to="{path:'/download'}">
         <template slot="title">
           <i class="iconfont elm">&#xe722;</i>
           <span class="custom-title">下载饿了么APP</span>
