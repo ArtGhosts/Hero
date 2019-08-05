@@ -1,9 +1,7 @@
 <template>
-
   <div>
     <!--顶部页面-->
     <div class="search">
-
       <div @click-right="asd" class="top_L">
         <van-icon name="arrow-left" @click="asd" class="vant_top"></van-icon>
         <span class="cityNa" >{{cityN}}</span>

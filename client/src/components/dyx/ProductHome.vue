@@ -9,7 +9,7 @@
 
 <script>
   import FastFood from './FastFood_dyx'
-  import Foot from  '../components/Foot_dyx'
+  import Foot from './Foot_dyx'
     export default {
         name: "ProductHome",
       components: {

@@ -1,10 +1,12 @@
 <template>
   <div class="order">
-    <van-nav-bar
-      title="订单列表"
-      left-arrow
-      @click-left="onClickLeft"
-    />
+  <div class="allhead">
+  <van-nav-bar
+    title="搜索"
+    left-arrow
+    @click-left="onClickLeft"
+  />
+</div>
   </div>
 </template>
 

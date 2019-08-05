@@ -1,0 +1,102 @@
+.productInform{
+  width: 100%;
+  background: white;
+  color: #999;
+  font-size: 0.75rem;
+}
+.nearbyShops img{
+  width: 3.955rem;
+}
+.productInform>header{
+  height: 2.375rem; ;
+  line-height: 2.375rem;
+}
+.productInform i{
+  font-size:1rem;
+  line-height: 2.375rem;
+  margin-left:0.875rem;
+  margin-right: 0.25rem;
+}
+.productInform ul{
+  width: 100%;
+  border-bottom: 0.036rem solid #e4e4e4;
+}
+.productInform ul li{
+  width:22.265rem;
+  height:4.474rem;
+  margin: 1.025rem  0.5859rem;
+}
+.productInform .right{
+  width: 17.7243rem;
+  display: inline-block;
+}
+/*第一行*/
+.infroms .pBrand{
+  display: inline-block;
+  background: #ffd930;
+  font-size:0.2925rem;
+  color: #000;
+  margin-right: 0.146rem;
+}
+.infroms h4{
+  width: 12.45rem;
+  font-size: 0.9525rem;
+  color:#000;
+  display: inline-block;
+  margin-right:2rem;
+  font-weight: bolder;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*第二行*/
+.salesVolume{
+  margin-top:0.8rem;
+  margin-bottom:0.8rem ;
+}
+/*评分*/
+.rate{
+  color: #ff6000;
+  font-size: 0.75rem;
+  margin-right: 0.3rem;
+}
+/*五角星*/
+.salesVolume>div{
+  display: inline-block;
+  margin-top: -2rem;
+  margin-right: 0.5rem;
+}
+.salesVolume i{
+  width: 0.2rem;
+  height: 0.2rem;
+  font-size: 0.2rem;
+  margin: 0.1rem;
+}
+/*送*/
+.salesVolume .send{
+  background: #3190e8;
+  border:0.0625rem solid #3190e8;
+  font-size: 0.75rem;
+  color:white;
+  margin-left:2.5rem;
+}
+/*到达*/
+.salesVolume .arrive{
+  border:0.0625rem solid #3190e8;
+  font-size: 0.75rem;
+  color:#3190e8;
+}
+
+/*第三行配送*/
+.money{
+  font-size: 0.75rem;
+}
+.money span:nth-child(1){
+  display: inline-block;
+  color: #000;
+  margin-right: 0.5rem;
+}
+.money span:nth-child(3){
+  color: #3190e8;
+}
