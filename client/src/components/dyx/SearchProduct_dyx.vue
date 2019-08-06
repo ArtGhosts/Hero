@@ -26,6 +26,7 @@
         <span>搜索历史</span>
         <ul class="searchHistory" v-for="(val,index) in history" :key="index">
           <li>{{val.name}}</li>
+          <span></span>
         </ul>
         <span>清除历史</span>
       </div>

@@ -4,7 +4,7 @@
     <div class="search">
       <div @click-right="asd" class="top_L">
         <van-icon name="arrow-left" @click="asd" class="vant_top"></van-icon>
-        <span class="cityNa" >{{cityN}}</span>
+        <span class="cityNa">{{cityN}}</span>
         <span @click="asd" class="qhcs_L">切换城市</span>
       </div>
 
@@ -23,8 +23,8 @@
       <div>
         <ul>
           <li v-for="(b,index) in shopping1" :key="index" class="ul_li_L" @click="changePage(index)">
-              <p>{{b.name}}</p>
-              <span>{{b.address}}</span>
+            <p>{{b.name}}</p>
+            <span>{{b.address}}</span>
           </li>
         </ul>
       </div>
@@ -75,13 +75,11 @@
       }
     },
     methods: {
-
       // 清除历史纪录
       eliminate() {
         localStorage.clear(localStorage);
         this.shopping1 = [];
         this.qingchulishi = false;
-
       },
 
       //点击获取信息
@@ -93,36 +91,53 @@
           return err.name == one.name;
         });
         //如果没有走上面的代码就运行这个
-        if (!result) {
+        if(!result) {
           this.shopping1.push(one);
           localStorage.setItem("name", JSON.stringify(this.shopping1))
         }
-
         //  路由传值
-        this.$router.push({path: "/fastFood", query: {cityGeohash: this.CitySearch[v].geohash}})
+        this.$router.push({
+          path: "/fastFood",
+          query: {
+            cityGeohash: this.CitySearch[v].geohash
+          }
+        });
         console.log(this.CitySearch[v]);
       },
       //路由传值
       changePage(v) {
-        this.$router.push({path: "/fastFood", query: {cityGeohash: this.shopping1[v].geohash}})
+        this.$router.push({
+          path: "/fastFood",
+          query: {
+            cityGeohash: this.shopping1[v].geohash
+          }
+        })
       },
 
       // console.log(this.shopping1)
 
       //获取输入框内部的值
       input_L() {
+
+        if(this.inputRef == "" || this.inputRef == null || this.inputRef == undefined) {
+          alert("请输入正确的值")
+        } else {
+          this.baba = true;
+          this.mama = false;
+        }
+
         console.log(this.inputRef);
         //点击按钮之后搜索的值显示出来
-        this.baba = true;
+
         //点击按钮之后搜索历史隐藏
-        this.mama = false;
+
         Vue.axios.get("https://elm.cangdu.org/v1/pois?city_id=" + this.cityI + "&keyword=" + this.inputRef).then((result) => {
+          // this.CitySearch = result.data;
           this.CitySearch = result.data;
           console.log(result);
         }).catch((err) => {
           console.log(err)
         })
-
       },
       //返回首页
       asd() {
@@ -132,24 +147,26 @@
       },
     },
     created() {
+      // if(this.inputRef=" "){
+      //   console.log("请输入密码");
+      // }else{
       let one = JSON.parse(localStorage.getItem("name")) || {};
       this.shuzu.push(one);
+
       console.log(this.shuzu);
       //这是从首页传来的id值
       this.cityI = this.$route.params.cityID;
       //这是从首页传来name值
       this.cityN = this.$route.params.cityName;
       // localStorage.setItem("fafa", JSON.stringify(cityN1));
-      if (this.cityI) {
+      if(this.cityI) {
         JSON.stringify(localStorage.setItem("id1", this.cityI));
-      }
-      else {
+      } else {
         this.cityI = JSON.parse(localStorage.getItem("id1"));
       }
-      if (this.cityN) {
+      if(this.cityN) {
         JSON.stringify(localStorage.setItem("name1", this.cityN));
-      }
-      else {
+      } else {
         this.cityN = JSON.parse(localStorage.getItem("name1"));
       }
       console.log(this.cityN)
@@ -157,15 +174,19 @@
     mounted() {
       this.shopping1 = JSON.parse(localStorage.getItem("name")) || [];
       console.log(this.shopping1);
-      if (this.shopping1.length > 0 || (this.inputRef == null)) {
+
+      if(this.shopping1.length > 0 || (this.inputRef == null)) {
         this.qingchulishi = true;
+      } else {
+        this.qingchulishi = false;
+
       }
     }
   }
-
 </script>
 <style scoped>
   /*顶部切换城市样式*/
+
   .qhcs_L {
     color: white;
     position: absolute;
@@ -173,15 +194,15 @@
     line-height: 3rem;
     font-size: 1rem
   }
-
   /*顶部外围div*/
+
   .top_L {
     width: 100%;
     height: 3rem;
     background: rgb(49, 144, 232);
   }
-
   /*用插件做的样式*/
+
   .vant_top {
     line-height: 3rem;
     position: absolute;
@@ -192,8 +213,8 @@
   .search i {
     color: white;
   }
-
   /*百度搜的*/
+
   input[type="text"] {
     border: 1px solid rgba(232, 232, 232, 0.5);
     box-sizing: border-box;
@@ -206,10 +227,9 @@
     padding: 0 1rem;
     text-decoration: none;
   }
-
-
   /*数据库首页传来的值的样式*/
-  .cityNa{
+
+  .cityNa {
     display: inline-block;
     width: 3rem;
     position: absolute;
@@ -218,8 +238,8 @@
     color: white;
     z-index: 10;
   }
-
   /*中间div设置*/
+
   .zhong_L {
     height: 8rem;
     width: 100%;
@@ -227,58 +247,60 @@
     text-align: center;
     margin-top: 0.5rem
   }
-
   /*信息按钮*/
+
   .xxan_L {
     width: 90%;
     margin-top: 0.8rem
   }
-
   /*里面的input*/
+
   .zhong_input_L {
     margin-top: 1rem;
     width: 90%;
     height: 2rem;
   }
-
   /*:class里面的设置*/
+
   .changeborder {
     border: 0.1rem solid sandybrown
   }
-
   /*下部操作*/
+
   .button_L {
     width: 100%;
   }
-
   /*下部搜索历史*/
+
   .ssls_L {
     line-height: 2rem
   }
-  .ssls_L ul>li>span{
+
+  .ssls_L ul>li>span {
     font-size: 0.75rem;
-    color:#999;
+    color: #999;
   }
   /*ul里面li的设置*/
+
   .ul_li_L {
     width: 100%;
     background: white;
     padding: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   }
-
   /*ul里面span标签*/
+
   .ul_span_L {
     line-height: 2rem
   }
-
   /*ul里面p标签*/
+
   .ul_p_L {
     font-weight: 300;
     font-size: 0.7rem
   }
-
   /*清除历史按钮*/
+
   .ClearHistory {
     width: 100%;
     height: 3rem;

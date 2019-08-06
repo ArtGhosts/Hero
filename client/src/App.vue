@@ -12,7 +12,10 @@ import Home from "./components/Home";
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
 export default {
   name: 'App',
-  components: {Home}
+  components: {Home},
+  "usingComponents": {
+    "van-dialog": "path/to/vant-weapp/dist/dialog/index"
+  }
 }
 </script>
 

@@ -13,12 +13,16 @@ import Home from  "@/components/Home"
 //搜索城市
 import ProductHome from  "@/components/dyx/ProductHome"
 
-import SearchCity from  "@/components/SearchCity_ldl"
 //外卖->食品分类->食品详情
 import FastFood from  "@/components/dyx/FastFood_dyx"
 import FastFoodCategroy from  "@/components/dyx/FastFood_categroy_dyx"
 import ProductDetails from  "@/components/dyx/ProductDetails_dyx"
 import FastFoodLunch from  "@/components/dyx/FastFoodLunch_dyx"
+
+
+
+import SearchCity from  "@/components/ldl/SearchCity_ldl"
+
 
 //搜索商品
 import SearchProduct from  "@/components/dyx/SearchProduct_dyx"
@@ -27,6 +31,15 @@ import ProductOrder from  "@/components/ProductOrder"
 //我的->我的余额
 import Mine from  "@/components/Mine"
 import Balance from  "@/components/Mine_balance"
+//我的->饿了么会员卡
+import  member from "@/components/ldl/member_ldl"
+//我的->服务中心
+import service from "@/components/ldl/service_ldl"
+//我的->服务中心-别的页面
+import mybaba from "@/components/ldl/Mybaba_ldl"
+//我的->下载app
+import download from "@/components/ldl/download_ldl"
+
 export default new Router({
   routes: [
     //首页
@@ -57,6 +70,13 @@ export default new Router({
         {path:'/mine',component:Mine},
       //  我的余额
         {path:'/balance',component:Balance},
+        //饿了么会员卡
+        {path:'/member',component:member},
+        //服务中心
+        {path:'/service',component:service,},
+        {path:'/mybaba',component:mybaba,name:"mybaba"},
+        //下载app
+        {path:'/download',component:download}
       ]},
 
 
