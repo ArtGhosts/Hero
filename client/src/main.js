@@ -8,6 +8,7 @@ Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 
+//引入axios发起请求
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios);
@@ -21,22 +22,25 @@ import '@/assets/js/resize.js'
 //引入vantUI组件
 import Vant from 'vant';
 import 'vant/lib/index.css';
-//
-// import  VueX from "vuex";
-// //引入vuex文件
-// import   vuex_y  from "./vuex/vuex_one"
-// Vue.use(VueX);
-// const store=new VueX.Store({
-//     moduel:{
-//       a:vuex_y
-//     }
-// });
 
 Vue.use(Vant);
+
+//引入VueX状态管理
+import VueX from  'vuex'
+import ShopsInfor from './VuexModule/NearbyShopsInfor'
+Vue.use(VueX);
+const store= new VueX.Store({
+  modules:{
+    shopsInfor:ShopsInfor,
+  }
+
+});
+
 // 挂载
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
 

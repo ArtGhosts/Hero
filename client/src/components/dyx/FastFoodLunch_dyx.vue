@@ -1,12 +1,12 @@
 <template>
-    <div class="categroy">
-      这是商品分类页面
+    <div class="lunch">
+      这是快餐页
     </div>
 </template>
 
 <script>
     export default {
-        name: "FastFood_categroy_dyx"
+        name: "FastFoodLunch_dyx"
     }
 </script>
 

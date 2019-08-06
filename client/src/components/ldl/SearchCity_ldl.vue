@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <!--顶部页面-->
     <div class="search">

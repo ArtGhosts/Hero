@@ -11,16 +11,21 @@ import  resetPassword  from "../components/resetPassword_nj"
 //首页
 import Home from  "@/components/Home"
 //搜索城市
-import ProductHome from  "@/components/ProductHome"
+import ProductHome from  "@/components/dyx/ProductHome"
+
+//外卖->食品分类->食品详情
+import FastFood from  "@/components/dyx/FastFood_dyx"
+import FastFoodCategroy from  "@/components/dyx/FastFood_categroy_dyx"
+import ProductDetails from  "@/components/dyx/ProductDetails_dyx"
+import FastFoodLunch from  "@/components/dyx/FastFoodLunch_dyx"
 
 
-import SearchCity from  "@/components/ldl/SearchCity_lgl"
-//外卖->食品分类
-import FastFood from  "@/components/FastFood_dyx"
-import FastFoodCategroy from  "@/components/FastFood_categroy_dyx"
+
+import SearchCity from  "@/components/ldl/SearchCity_ldl"
+
 
 //搜索商品
-import SearchProduct from  "@/components/SearchProduct"
+import SearchProduct from  "@/components/dyx/SearchProduct_dyx"
 //订单
 import ProductOrder from  "@/components/ProductOrder"
 //我的->我的余额
@@ -50,9 +55,15 @@ export default new Router({
         {path:'/',redirect:"/fastFood"},
         //外卖
         {path:'/fastFood',component:FastFood},
-        {path:'/FastFoodCategroy',component:FastFoodCategroy},
+        //食品分类
+        {path:'/FastFoodCategroy',component:FastFoodCategroy,children:[
+            {path:'/lunch',component:FastFoodLunch},
+          ]},
+
+        //食品详情
+        {path:'/ProductDetails',component:ProductDetails},
         //搜索
-        {path:'/searchProduct',component:SearchProduct},
+        {path:'/searchProduct',component:SearchProduct,name:'searchProduct'},
         //订单
         {path:'/order',component:ProductOrder},
         //我的

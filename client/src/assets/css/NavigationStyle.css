@@ -1,0 +1,36 @@
+/*头部导航 */
+.allhead{
+  width: 100%;
+  position: fixed;
+  left:0;
+  top:0;
+  z-index: 10;
+  height: 2.5rem;
+}
+.head>div{
+  height: 2.875rem;
+}
+.head div{
+  background:#3190e8;
+  color: white;
+  line-height:2.875rem;
+  font-size: 1.125rem;
+}
+.head span, .head i{
+  color: white !important;
+}
+.cityNa{
+  display: inline-block;
+  width: 11.718rem;
+  position: absolute;
+  top: 1rem;
+  left:25%;
+  color: white;
+  z-index: 10;
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

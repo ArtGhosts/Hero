@@ -2,23 +2,23 @@
       <van-tabbar>
         <ul class="foot">
         <li>
-          <img v-if="isShow" src="../../static/home-selected.png" alt="" @click=" changePage1">
-          <img v-else src="../../static/home.png" >
+          <img v-if="isShow" src="../../../static/home-selected.png" alt="" @click=" changePage1">
+          <img v-else src="../../../static/home.png" >
           <span>外卖</span>
         </li>
         <li>
-          <img v-if="isShow" src="../../static/order.png" @click=" changePage2" >
-          <img v-else src="../../static/order-selected.png" alt="">
+          <img v-if="isShow" src="../../../static/order.png" @click=" changePage2" >
+          <img v-else src="../../../static/order-selected.png" alt="">
           <span>搜索</span>
         </li>
         <li>
-          <img v-if="isShow" src="../../static/find.png" @click=" changePage3">
-          <img v-else src="../../static/find-selected.png">
+          <img v-if="isShow" src="../../../static/find.png" @click=" changePage3">
+          <img v-else src="../../../static/find-selected.png">
           <span>订单</span>
         </li>
         <li>
-          <img v-if="isShow" src="../../static/mine.png" @click=" changePage4">
-          <img v-else src="../../static/mine-selected.png">
+          <img v-if="isShow" src="../../../static/mine.png" @click=" changePage4">
+          <img v-else src="../../../static/mine-selected.png">
           <span>我的</span>
         </li>
         </ul>
