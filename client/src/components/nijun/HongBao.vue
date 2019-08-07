@@ -34,7 +34,7 @@
     </div>
     <footer class="header_link header_link_a text-center">
       <router-link :to="{path:'/exchangeHB'}" style="border-right: 1px solid #f0f0f0">兑换红包</router-link>
-      <router-link :to="{path:''}">推荐有奖</router-link>
+      <router-link :to="{path:'/Recommend'}">推荐有奖</router-link>
     </footer>
 
   </div>

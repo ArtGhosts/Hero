@@ -44,7 +44,11 @@ import DaiJinQuan from "@/components/nijun/DaiJinQuan"
 import daimoneyspaek from "@/components/nijun/daimoneyspaek"
 // 兑换红包
 import exchangeHB from "@/components/nijun/exchangeHB"
-
+// 推荐有奖
+import Recommend from "@/components/nijun/Recommend"
+//积分
+import Integral from "@/components/nijun/Integral_nj"
+//--------------------------------------------------------------------
 
 
 //我的->饿了么会员卡
@@ -115,7 +119,10 @@ export default new Router({
         {path:'/daimoneyspaek',component:daimoneyspaek},
         // 兑换红包
         {path:'/exchangeHB',component:exchangeHB},
-
+        // 推荐
+        {path:'/Recommend',component:Recommend},
+        // 积分
+        {path:'/Integral',component:Integral},
       ]},
         {path:"/member/Discounts_ldl",component:Discounts_ldl},
         {path:"/member_ldl",component:member_ldl},
