@@ -7,12 +7,10 @@
   z-index: 10;
   height: 2.5rem;
 }
-.head>div{
-  height: 2.875rem;
-}
 .head div{
   background:#3190e8;
   color: white;
+  height: 2.875rem;
   line-height:2.875rem;
   font-size: 1.125rem;
 }

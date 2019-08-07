@@ -22,13 +22,14 @@
       </ul>
 
       <!--搜索历史-->
-      <div v-if="isShow">
-        <span>搜索历史</span>
+      <div v-if="isShow" class="history">
+        <span class="search">搜索历史</span>
         <ul class="searchHistory" v-for="(val,index) in history" :key="index">
-          <li>{{val.name}}</li>
-          <span></span>
+          <li class="list">
+            <span class="pull-left">{{val.name}}</span><span @click="deleteOne(val)" class="pull-right"><i class="iconfont">&#xe602;</i></span>
+          </li>
         </ul>
-        <span>清除历史</span>
+        <span @click="deleteHistory" class="del">清除历史</span>
       </div>
 
     </div>
@@ -58,24 +59,31 @@
           this.$router.go(-1)
         },
         present(){
+          this.isShow=true;
           //  将数据存储
           let name={
             name:this.value
-          }
-          localStorage["inputValue"]=name;
+          };
+          localStorage["inputValue"]=JSON.stringify(name);
           this.$store.commit("saveValue",name);
           //根据关键字获取食品信息
           // Vue.axios.get("https://elm.cangdu.org/v1/pois?geohash=31.22967,121.4762&keyword="+this.value).then((result)=>{
-          //   console.log(result.data)
+          //   console.log(result.data);
           //   this.valData=result.data;
           // }).catch((err)=>{
           //   console.log(err)
           // });
+          },
+        //删除所有
+        deleteHistory(){
+          this.isShow=false;
+          localStorage["inputValue"]=[]
         },
-        created(){
-          this.value=localStorage["inputValue"];
-        }
-      }
+        //删除某一个
+        deleteOne(v){
+          this.$store.commit("deleteOnes",v);
+          }
+        },
     }
 </script>
 
@@ -110,10 +118,45 @@
     margin-left: 2rem;
     margin-top: 1rem;
     background:#f2f2f2;
+    padding-left: 0.5rem;
   }
   .bottom button{
     width:4.8125rem;
     height:2.1975rem;
     line-height:2.1975rem;
+  }
+  .history .search{
+    display: inline-block;
+    width: 100%;
+    background: #f5f5f5;
+    height: 2.875rem;
+    line-height: 2.875rem;
+    font-size: 0.875rem;
+    color: #666;
+   padding-left: 0.625rem;
+  }
+  .history .del{
+    display: inline-block;
+    width: 100%;
+    height: 2.875rem;
+    line-height: 2.875rem;
+    text-align: center;
+    color:#3190e8;
+    font-weight: bolder;
+    background: white;
+  }
+  .searchHistory .list{
+    width: 100%;
+    height: 2.875rem;
+    /*line-height: 2.875rem;*/
+    background: white;
+    border-bottom: 0.0625rem solid #e4e4e4;
+
+  }
+  .list span{
+    display:inline-block;
+    margin-left: 0.625rem;
+    line-height: 2.875rem;
+
   }
 </style>

@@ -3,7 +3,7 @@
   <div class="nav">
     <!--密码登录-->
     <div class="topnj">
-      <router-link :to="{path:'/'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/mine'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
       <div class="denglu">
         密码登录
       </div>
@@ -39,7 +39,7 @@
     <div class="alert alert-warning text-center LmAlert bounceIn" v-if="isShow">
       <!--警告框的图标-->
       <img src="../assets/jinggaokuang.png" height="100" width="100"/>
-      <p>请输入账号/密码/验证码</p>
+      <p>{{content}}</p>
       <button class="btn btn-success btn-group btn-block" @click="isShow=false">确认</button>
     </div>
   </div>
@@ -70,6 +70,7 @@
           right:'-0.9rem'
         },
         isPass:"password",
+        userInfor:'',
         LmV:'',
         LmP:'',
         LmY:'',
@@ -77,8 +78,9 @@
         isTrue:false,
         isShow:false,
         isStr:'',
-        loginReturn:''
-
+        loginReturn:'',
+      //弹框的内容
+        content:'',
       }
     },
     methods:{
@@ -93,36 +95,46 @@
           this.isPass ='password'
         }
       },
+      //判断并存储用户名和密码
       login(){
-        if(this.LmV!='' && this.LmP !='' && this.LmY!=''){
-          Vue.axios.post('https://elm.cangdu.org/v2/login',{
-            username:this.LmV,
-            password:this.LmP,
-            captcha_code:this.LmY
-          }).then((res)=>{
-            this.loginReturn = res.data.message;
-            if (this.loginReturn==='密码错误') {
+      //获取用户名和密码，若已存在，直接登录，若不存在直接注册
+        let userIn={
+          name:this.LmV,
+          password:this.LmP,
+        };
+        Vue.axios.post("https://elm.cangdu.org/v2/login",{username   :this.LmV,password:this.LmP,captcha_code:this.LmY}).then((result)=>{
+          console.log(result.data);
+          if(result.data.message=="用户名参数错误"){
+              this.content="请输入账号";
               this.isShow=true;
-            }else {
-              this.$router.push({path:'/nmine_load'})
-              // this.$store.state.LmPersonInfor=res.data
-            }
-          }).catch((err)=>{
-            console.log(err)
-          })
-        }else if (this.LmV==='' && this.LmP ==='' && this.LmY==='') {
-          this.isShow=true;
-        }
+            console.log(1)
+          }else if(result.data.message=="密码参数错误"){
+            this.content="请输入密码";
+            this.isShow=true;
+            console.log(2)
+          }else if(result.data.message=="验证码参数错误"){
+            this.content="验证码失效，请重新输入验证码";
+            this.isShow=true;
+          }else{
+            // 将用户名存储到localStorage
+            localStorage["userInfor"]=JSON.stringify(userIn);
+            // 将用户名存储到用VueX中
+            this.$router.push({path:"/mine"});
+            this.$store.commit("saveInfor",userIn);
+          }
+        }).catch((err)=>{
+          console.log(err)
+        })
       },
       getD(){
-        this.isFalse=!this.isFalse
+        this.isFalse=!this.isFalse;
         Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
           this.isStr = res.data.code
         })
       }
     },
     created(){
-      this.isFalse=!this.isFalse
+      this.isFalse=!this.isFalse;
       Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
         this.isStr = res.data.code
         // console.log(this.isStr);
@@ -217,10 +229,14 @@
   }
   /*啥都没输的提示*/
   .LmAlert{
+    width:13rem;
     background: white;
     position: absolute;
     top:30%;
     left:20%;
+  }
+  .LmAlert p{
+    margin: 1rem auto;
   }
   /*验证码图片大小*/
   .img{

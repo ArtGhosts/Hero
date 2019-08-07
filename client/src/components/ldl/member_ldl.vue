@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <!--顶部操作-->
     <div class="search">
       <div class="top_L">
@@ -13,58 +14,64 @@
     <div>
       <p style="line-height: 2.5rem">为账户***购买会员</p>
       <!--会员特权-->
-      <div style="background: honeydew;">
-        <van-cell title="会员特权" is-link value="会员说明" />
+      <van-cell title="会员特权" is-link value="会员说明" :to="{path:'/member/Discounts_ldl'}"></van-cell>
+    </div>
+    <!--减免配送费-->
+    <div class="jianmian">
+      <div class="distribution">
+        <img src="../../assets/imgs/province.jpg" height="42.16" width="37.15" class="distribution_img" />
+        <div class="distribution_div">
+          <h4>减免配送费</h4>
+          <p>每月减30单,每日可减免3单,每单最高减4元.</p>
+          <p>蜂鸟转送专享</p>
+        </div>
       </div>
       <!--减免配送费-->
-      <div class="jianmian">
-        <div class="distribution">
-          <img src="../../assets/imgs/province.jpg" height="42.16" width="37.15" class="distribution_img" />
-          <div class="distribution_div">
-            <h4>减免配送费</h4>
-            <p>每月减30单,每日可减免3单,每单最高减4元.</p>
-            <p>蜂鸟转送专享</p>
-          </div>
+      <div class="distribution">
+        <img src="../../assets/imgs/subtract.jpg" height="42.16" width="37.15" class="distribution_img" />
+        <div class="distribution_div">
+          <h4>减免配送费</h4>
+          <p>每月减30单,每日可减免3单,每单最高减4元.</p>
+          <p>蜂鸟转送专享</p>
         </div>
-        <!--减免配送费-->
-        <div class="distribution">
-          <img src="../../assets/imgs/subtract.jpg" height="42.16" width="37.15" class="distribution_img" />
-          <div class="distribution_div">
-            <h4>减免配送费</h4>
-            <p>每月减30单,每日可减免3单,每单最高减4元.</p>
-            <p>蜂鸟转送专享</p>
-          </div>
-        </div>
-      </div>
-      <!--开通会员-->
-      <div class="jianmian" >
-        <van-cell title="开通会员" />
-        <!--下方布局-->
-        <div class="jianmian_left">
-          <!--左边布局-->
-            <span>1个月 </span>
-            <span class="jianmian_left_span">￥20</span>
-          <!--右边布局-->
-          <div  class="jianmian_right">
-            <span >购买</span>
-          </div>
-        </div>
-      </div>
-      <!--兑换会员-->
-      <div style="margin-bottom: 0.6rem;">
-        <van-cell title="兑换会员" is-link value="使用卡号卡密" />
-      </div>
-      <!--购买记录-->
-      <div style="margin-bottom: 0.6rem;">
-        <van-cell title="购买记录" is-link value="开发票" />
       </div>
     </div>
+    <!--开通会员-->
+    <div class="jianmian" >
+      <van-cell title="开通会员" />
+      <!--下方布局-->
+      <div class="jianmian_left">
+        <!--左边布局-->
+        <span>1个月 </span>
+        <span class="jianmian_left_span">￥20</span>
+        <!--右边布局-->
+        <div class="jianmian_right" @click="shopping">
+          <span>购买</span>
+        </div>
+      </div>
+    </div>
+    <!--兑换会员-->
+    <div style="margin-bottom: 0.6rem;">
+      <van-cell title="兑换会员" is-link value="使用卡号卡密"   :to="{path:'/member/conversion_ldl'}"></van-cell>
+
+    </div>
+    <!--购买记录-->
+    <div style="margin-bottom: 0.6rem;">
+      <van-cell title="购买记录" is-link value="开发票" :to="{path:'/member/record_ldl'}"></van-cell>
+    </div>
   </div>
+
 </template>
 
 <script>
   export default {
-    name: "member_ldl"
+    name: "member_ldl",
+    methods:{
+      shopping(){
+        this.$router.push({path:'/member/purchase_ldl'})
+      }
+
+    }
   }
 </script>
 

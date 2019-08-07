@@ -10,6 +10,8 @@ const product={
 
   //  存储搜索食品的值
     saveFoodName:[],
+  //存储用户信息
+    userInfor:JSON.parse(localStorage["userInfor"])||{},
   },
   mutations:{
     getShopsInfor(state,res){
@@ -23,8 +25,18 @@ const product={
       state.productDetailInfor=payload;
       console.log(state.productDetailInfor)
     },
+    //存储搜索信息
     saveValue(state,payload){
       state.saveFoodName.push(payload)
+    },
+  //  删除某一个信息
+    deleteOnes(state,payload){
+      state.saveFoodName.splice(payload)
+    },
+
+  //  存储用户信息
+    saveInfor(state,payload){
+        state.userInfor=payload
     }
   },
   actions:{

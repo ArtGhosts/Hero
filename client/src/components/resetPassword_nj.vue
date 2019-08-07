@@ -14,7 +14,7 @@
       <input type="text" placeholder="账号" v-model="LmV">
       <input :type="isPass" placeholder="旧密码" v-model="LmW">
       <input :type="isPass" placeholder="请输入新密码" v-model="LmP">
-      <input :type="isPass" placeholder="请确认新密码" v-model="LmP">
+      <input :type="isPass" placeholder="请确认新密码" v-model="newLmP">
 
       <!--验证码-->
       <input type="text" placeholder="验证码" v-model="LmY" maxlength="4">
@@ -27,7 +27,13 @@
       <button class="btn btn-success btn-group btn-block success_nj" @click="login">确认修改</button>
     </div>
     <!--修改按钮-->
-
+    <!--这是个警告框-->
+    <div class="alert alert-warning text-center LmAlert bounceIn" v-if="isShow1">
+      <!--警告框的图标-->
+      <img src="../assets/jinggaokuang.png" height="100" width="100"/>
+      <p>{{content}}</p>
+      <button class="btn btn-success btn-group btn-block" @click="isShow1=false">确认</button>
+    </div>
   </div>
 </template>
 
@@ -40,6 +46,7 @@
             isPass:"text",
             LmV: '',
             LmP:'',
+            newLmP:'',
             LmY:'',
             LmW:'',
             LmCoad: '',
@@ -48,22 +55,44 @@
             isFalse:true,
             isShow:false,
             isStr:'',
-            alertTxt:''
-
+            alertTxt:'',
+          // 存储过的用户名和密码
+            saveName:{},
+            content:"",
+            isShow1:false
           }
       },
       methods:{
           login(){
             Vue.axios.post('https://elm.cangdu.org/v2/changepassword',{
               username:this.LmV,
-              oldpassWord:this.LmLP,
-              newpassword:this.LmP,
-              confirmpassword:this.LmP,
+              oldpassWord:this.LmP,
+              newpassword:this.newLmP,
+              confirmpassword:this.newLmP,
               captcha_code:this.LmY
             }).then((res)=>{
-              if (res.data.success==='密码修改成功'){
-                this.isShow=!this.isShow;
-                this.alertTxt='密码修改成功'
+              console.log(res.data);
+              //判断用户名与之前存储的用户名一致
+              if(res.data.message=="用户名参数错误"){
+                this.content="请重新输入账号";
+                  this.isShow1=true;
+              } else if(res.data.message=="必须添加旧密码"){
+                this.content="密码错误，请输入旧密码";
+                this.isShow1=true;
+              } else if(res.data.message=="必须填写新密码"){
+                this.content="请输入新密码";
+                this.isShow1=true;
+              } else if(res.data.message=="请填写验证码") {
+                this.content = "请填写验证码";
+                this.isShow1 = true;
+              }else if(res.data.message=="验证码不正确") {
+                this.content = "验证码失效";
+                this.isShow1 = true;
+              }else if(res.data.message=="密码不正确") {
+                this.content = "密码不正确";
+                this.isShow1 = true;
+              }else{
+                this.content = "密码修改成功";
               }
             })
           },
@@ -73,13 +102,8 @@
               this.isStr = res.data.code
             })
         },
-        created(){
-            this.isFalse=!this.isFalse;
-            Vue.axios.post('https://elm.cangdu.org/v1/captchas').then((res)=>{
-              this.isStr = res.data.code
-            })
-        }
-      }
+      },
+
     }
 </script>
 
@@ -155,5 +179,28 @@
   /*确认按钮*/
   .success_nj{
     line-height: 2.1rem;
+  }
+
+  /*啥都没输的提示*/
+  .LmAlert{
+    width:13rem;
+    background: white;
+    position: absolute;
+    top:30%;
+    left:20%;
+  }
+  .LmAlert p{
+    margin: 1rem auto;
+  }
+  /*验证码图片大小*/
+  .img{
+    width: 3.2rem;
+    height: 2.2rem;
+  }
+  /*眼瞎换一张*/
+  .Lcantsee{
+    position: absolute;
+    top: 16.5rem;
+    right: 0.5rem;
   }
 </style>
