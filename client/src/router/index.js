@@ -30,7 +30,7 @@ import ProductOrder from  "@/components/ProductOrder"
 
 //我的->我的余额
 import Mine from  "@/components/Mine"
-import Balance from  "@/components/Mine_balance"
+import Balance from  "@/components/nijun/Mine_balance"
 import Detail from "@/components/nijun/detail"
 //我的->优惠->红包明细
 import Benefit from "@/components/nijun/Benefit"
