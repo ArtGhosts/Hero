@@ -46,7 +46,6 @@
 </script>
 
 <style scoped>
-
   .search i {
     color: white;
   }
@@ -98,8 +97,5 @@
     font-size: 0.9rem;
 
   }
-
-
-
 
 </style>
