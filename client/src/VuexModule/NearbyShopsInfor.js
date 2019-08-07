@@ -11,7 +11,9 @@ const product={
   //  存储搜索食品的值
     saveFoodName:[],
   //存储用户信息
-    userInfor:JSON.parse(localStorage["userInfor"])||{},
+    userInfor:JSON.parse(localStorage["userInfor"] || "{}"),
+  //  商品属性的信息数据
+    saveProNature:[],
   },
   mutations:{
     getShopsInfor(state,res){
@@ -37,17 +39,21 @@ const product={
   //  存储用户信息
     saveInfor(state,payload){
         state.userInfor=payload
+    },
+  //存储商品属性信息
+    saveProductNature(state,payload){
+      state.saveProNature.push(payload)
     }
   },
-  actions:{
-    //获取附近商家的信息
-    getShopsInfor(context){
-      Vue.axios({
-        url:"https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762"
-      }).then((result)=>{
-        context.commit('getShopsInfor',result.data)
-      })
-    }
-  }
+  // actions:{
+  //   //获取附近商家的信息
+  //   getShopsInfor(context){
+  //     Vue.axios({
+  //       url:"https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762"
+  //     }).then((result)=>{
+  //       context.commit('getShopsInfor',result.data)
+  //     })
+  //   }
+  // }
 };
 export default product
