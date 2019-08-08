@@ -1,97 +1,90 @@
 <template>
-  <div class="root_payment">
-    <!--头部导航条-->
+  <div class="header">
+    <!--顶部操作-->
+    <div class="search">
+      <div class="top_L">
+        <router-link :to="{path:'/member'}">
+          <van-icon name="arrow-left" class="vant_top1" :to="{path:'/member'}"></van-icon>
+        </router-link>
+        <h4 class="cityNa" :to="{path:'/member'}">我的优惠</h4>
+      </div>
+    </div>
+    <!--剩余时间-->
+    <div class="content">
+      <p class="pay">支付剩余时间</p >
+      <van-count-down :time="time" class="time"/>
+    </div>
+    <div class="pay_way">选择支付方式</div>
     <div>
-      <van-nav-bar
-        title="在线支付"
-        left-arrow
-        @click-left="onClickLeft"
-      />
+      <van-radio-group v-model="radio" class="group" >
+        <div class="zfb">
+          <van-cell title="支付宝"  class="van" />
+          <van-radio name="1" class="fk" checked-color="#07c160"></van-radio>
+        </div>
+        <div class="zfb">
+          <van-cell title="微信"  class="van" />
+          <van-radio name="2" class="fk" checked-color="#07c160"></van-radio>
+        </div>
+      </van-radio-group>
     </div>
-
-    <div class="box1">
-      <p class="p1">支付剩余时间</p>
-      <div class="box2">
-        <van-count-down :time="time" />
-      </div>
-    </div>
-    <div class="box3">
-      <p class="p2">选择支付方式</p>
-    </div>
-
-    <div class="box4">
-      <div class="box5">
-        <!--<img src="../assets/img/zhifubao.png" alt="">-->
-        <span class="s1">支付宝</span>
-      </div>
-      <div class="box5">
-        <!--<img src="../assets/img/weixin.png" alt="">-->
-        支付宝
-      </div>
-    </div>
-
+    <div class="alert  text-center LmAlert   button">
+      <van-button type="primary"  class="click_1">下载</van-button>
   </div>
+  </div>
+
 </template>
+
+
 
 <script>
 
   export default {
-    name: "purchase_ldl",
-    data(){
-      return{
-        time:  15 * 60 * 1000
-      }
+    name: "invoicerecord",
+    data() {
+      return {
+        time:15 * 60 * 1000,
+        radio: '1',
+        name:""
+      };
+    },
+    mounted(){
+
     },
     methods:{
       onClickLeft(){
-        this.$router.go(-1)
-      },
-    }
+        Toast("返回")
+      }
 
+    }
   }
 </script>
 
 <style scoped>
-  .van-nav-bar__title{
+  /*<!--顶部操作-->*/
+  .search i {
     color: white;
-    font-weight:700;
-    font-size: 0.18rem;
   }
-  .van-nav-bar{
-    background: #3190e8;
-
-  }
-  .van-icon {
+  .cityNa {
+    display: inline-block;
+    width: 80%;
+    position: absolute;
+    top: 1rem;
+    text-align: center;
+    left: 10%;
     color: white;
-    font-size: 0.25rem;
-    margin-left: -100%;
+    z-index: 10;
+    font-weight: bold;
   }
-  .box1{
-    background: white;
+  .vant_top1 {
+    line-height: 3rem;
+    position: absolute;
+    left: 0.8rem;
+    font-size: 1.3rem
+  }
+  .top_L {
     width: 100%;
-    height: 1.48rem;
-    text-align: center ;
-    overflow: hidden;
-  }
-  .van-count-down{
-    font-size: 0.3552rem;
-    margin-top: 5%;
-  }
-  .p1{
-    margin-top: 10%;
-    font-size: 0.14rem;
-    color: #666;
-  }
-  .p2{
-    line-height: 0.5rem ;
-    padding-left: 5%;
-  }
-  .box4{
-    background: white;
-    width: 100%;
-    height: 1.60rem;
-    /*line-height: 1.6rem;*/
-    overflow: hidden;
+    height: 3rem;
+    background: rgb(49, 144, 232);
   }
   .box4 img{
     width: 0.4699rem;
@@ -102,14 +95,36 @@
 
 
   }
-  .box5{
-    height: 50%;
-    border-bottom: 1px solid  #f5f5f5;
-
+/*计时器*/
+  .content{
+    background: greenyellow;
+    text-align: center;
+    padding-top: 2rem;
+    height: 8rem;
   }
-  .s1{
-    display: inline-block;
-    vertical-align: 0.15rem;
-    margin-left: 2%;
+  .pay{
+    margin-bottom: 1rem;
+  }
+  .time{
+    font-size: 2rem;
+  }
+  /*选择支付方式*/
+  .pay_way{
+    line-height: 3rem;
+  }
+  /*支付宝微信*/
+  .zfb{
+    display: flex;
+    background: white;
+    height: 3rem;
+    padding-right: 1rem;
+  }
+
+
+  /*确认支付*/
+
+  .click_1 {
+    width: 95%;
+    border-radius: .2rem
   }
 </style>

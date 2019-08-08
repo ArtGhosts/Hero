@@ -45,15 +45,15 @@ const product={
       state.saveProNature.push(payload)
     }
   },
-  // actions:{
-  //   //获取附近商家的信息
-  //   getShopsInfor(context){
-  //     Vue.axios({
-  //       url:"https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762"
-  //     }).then((result)=>{
-  //       context.commit('getShopsInfor',result.data)
-  //     })
-  //   }
-  // }
+  actions:{
+    //获取附近商家的信息
+    getShopsInfor(context){
+      Vue.axios({
+        url:"https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762"
+      }).then((result)=>{
+        context.commit('getShopsInfor',result.data)
+      })
+    }
+  }
 };
 export default product

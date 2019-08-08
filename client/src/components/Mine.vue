@@ -43,7 +43,7 @@
         </div>
       </router-link>
       <!--3-->
-      <router-link :to="{path:'/login'}">
+      <router-link :to="{path:'/Integral'}">
 
         <div class="integral">
           <span class="moneys">0</span>

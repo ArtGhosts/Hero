@@ -65,14 +65,14 @@
         for(let i in err.data) {
           arr.push(err.data[i]);
         }
-        // console.log(arr);
+        console.log(arr);
         arr.splice(24, 1);
         arr.splice(17, 4);
         console.log(arr);
         for(let j = 0; j <= arr.length; j++) {
           // arr.length
           this.content.push(arr[2 * j - 1]);
-          this.content1.push(arr[2 * j])
+          // this.content1.push(arr[2 * j])
         }
         console.log(this.content1);
         console.log(this.content);

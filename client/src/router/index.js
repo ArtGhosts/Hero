@@ -65,6 +65,11 @@ import member_ldl from "@/components/ldl/member_ldl"
 import record_ldl from "@/components/ldl/record_ldl"
 import conversion_ldl from "@/components/ldl/conversion_ldl"
 import purchase_ldl from "@/components/ldl/purchase_ldl"
+//修改用户名
+import amend_ldl from "@/components/ldl/amend_ldl"
+//编辑地址
+import consignee_ldl from "@/components/ldl/consignee_ldl"
+
 
 
 export default new Router({
@@ -85,7 +90,6 @@ export default new Router({
         {path:'/fastFood',component:FastFood},
         //食品分类
         {path:'/FastFoodCategroy',component:FastFoodCategroy},
-
         //食品详情
         {path:'/ProductDetails',component:ProductDetails},
         //搜索
@@ -124,12 +128,16 @@ export default new Router({
         // 积分
         {path:'/Integral',component:Integral},
       ]},
+        //------------------------------------------------------------------------------
         {path:"/member/Discounts_ldl",component:Discounts_ldl},
         {path:"/member_ldl",component:member_ldl},
         {path:"/member/record_ldl",component:record_ldl},
         {path:"/member/conversion_ldl",component:conversion_ldl},
         {path:"/member/purchase_ldl",component:purchase_ldl},
-
+        //修改用户名
+        {path:"/memberend/amend_ldl",component:amend_ldl},
+        // 编辑地址
+        {path:"/member/consignee_ldl",component:consignee_ldl},
 
   ]
 })
