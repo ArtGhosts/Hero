@@ -33,10 +33,9 @@
         </section>
       </div>
 
-      <!--点击分类之后出现下拉列表的内容-->
         <div class="allMask">
           <!--点击分类之后出现下拉列表的内容-->
-          <transition enter-active-class="animated slideInDown" leave-active-class="animated slideInDown" mode="out-in">
+          <transition enter-active-class="animated slideInDown" leave-active-class="animated fade" mode="out-in">
             <div class="mask" v-if="isChange1">
               <!--分类列表-->
               <ul class="lists pull-left">
@@ -44,7 +43,7 @@
                   <span>{{food.name}}</span>
                   <span class="count">{{food.count}}</span>
                 </li>
-                <li v-for="(val,index) in categoryList" :key="index" @click="foodDetails(index)" :class="{changeColor:isShow}">
+                <li v-for="(val,index) in categoryList" :key="index" @click="foodDetails(index)" :class="{'changeColor':isShow}">
                   <img :src="getImgPath(val.image_url)">
                   <span>{{val.name}}</span>
                   <span>{{val.count}}</span>
@@ -53,7 +52,7 @@
               </ul>
               <!--商品齐分类详情-->
               <ul class="lists pull-left" >
-                <li v-for="(val,index) in allFood" :key="index" @click="getSelectFood(val.id)">
+                <li v-for="(val,index) in allFood" :key="index" @click="getSelectFood(val)">
                   <span>{{val.name}}</span>
                   <span class="pull-right">{{val.count}}</span>
                 </li>
@@ -61,16 +60,18 @@
             </div>
           </transition>
           <!--点击排序之后出现下拉列表的内容-->
-          <transition enter-active-class="animated slideInDown" mode="out-in">
+          <transition enter-active-class="animated slideInDown" leave-active-class="animated fade" mode="out-in">
           <ul class="mask mask1" v-if="isChange2">
-            <li v-for="(val,index) in sortProduct" :key="index">
+            <li v-for="(val,index) in sortProduct" :key="index" @click="reSortProduct(index+1)">
               <span><i class="iconfont" :class="{'color1':'true'}" v-html="val.sign"></i></span>
-              <p class="pull-right">{{val.name}}</p>
+              <p class="pull-right">
+                <span class="pull-left">{{val.name}}</span>
+              <span v-if="val.select" class="deleteB pull-right"><i class="iconfont" :style="{color:'#3190e4'}">&#xe65b;</i></span></p>
             </li>
           </ul>
           </transition>
           <!--点击筛选之后出现下拉列表的内容-->
-          <transition enter-active-class="animated slideInDown" mode="out-in">
+          <transition enter-active-class="animated slideInDown" leave-active-class="animated fade" mode="out-in">
             <div class="mask mask2" v-if="isChange3">
               <div class="mask_top">
                 <p>配送方式</p>
@@ -176,13 +177,12 @@
             isChangeSend: false,
             //排序数组
             sortProduct: [
-              {sign: '&#xe605;', name: "智能排序"},
-              {sign: '&#xe600;', name: "距离最近"},
-              {sign: '&#xe6d4;', name: "销量最高"},
-              {sign: '&#xe605;', name: "起送价最低"},
-              {sign: '&#xe63b;', name: "配送速度最快"},
-              {sign: '&#xe65d;', name: "评分最高"},
-
+              {sign: '&#xe60f;', name: "智能排序",select:false},
+              {sign: '&#xe600;', name: "距离最近",select:false},
+              {sign: '&#xe6d4;', name: "销量最高",select:false},
+              {sign: '&#xe605;', name: "起送价最低",select:false},
+              {sign: '&#xe63b;', name: "配送速度最快",select:false},
+              {sign: '&#xe65d;', name: "评分最高",select:false},
             ],
             // 商家所有属性
             allShopSelect: [
@@ -204,6 +204,7 @@
         clickPoint() {
           this.isChange = !this.isChange;
         },
+        //对分类图片做的处理
         getImgPath(path) {
           //传递过来的图片地址需要处理后才能正常使用
           let suffix;
@@ -224,6 +225,10 @@
           // this.isShow=true;
           this.allFood = this.categoryList[index].sub_categories
           console.log(this.allFood)
+          // this.categoryList[index].level=0
+          // if(this.categoryList[index].level==0){
+          //   this.isShow=1;
+          // }
         },
         //点击箭头变色
         clickPoint(sign) {
@@ -246,11 +251,13 @@
           }
         },
         //点击获取商家详情
-        getSelectFood(id) {
-          console.log(id)
+        getSelectFood(v) {
+          this.cityNa=v.name;
+            this.title=v.name;
+          console.log(v.id,v.name);
           //通过传参获取改id对应的视频数据
-          Vue.axios.get("https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&restaurant_category_ids[]="+id).then((result) => {
-            console.log(result.data);
+          Vue.axios.get("https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&restaurant_category_ids[]="+v.id).then((result) => {
+            // console.log(result.data);
             this.listOfNearbyMerchants = result.data
           }).catch((err)=>{
             console.log(err)
@@ -280,6 +287,23 @@
             return v.select = true;
           })
         },
+
+      // 对商品进行排序
+        reSortProduct(id){
+          this.sortProduct.map((v)=>{
+            return v.select=false
+          });
+          this.sortProduct[id-1].select=true;
+          Vue.axios.get("https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&order_by="+id).then((result) => {
+            console.log(result.data);
+            this.listOfNearbyMerchants = result.data
+          }).catch((err)=>{
+            console.log(err)
+          })
+        //下拉列表收回
+          this.isChange2=false
+        }
+
       },
       computed:{
         //商品属性数量
@@ -303,7 +327,8 @@
       created(){
       //从localStorage中获取分类标题
         this.title=localStorage["title"];
-      //  获取分类的名字
+        console.log(localStorage["foodName"]);
+        //  获取分类的名字
         Vue.axios.get("https://elm.cangdu.org/shopping/v2/restaurant/category").then((result)=>{
           // console.log(result.data);
           this.food=result.data[0];
@@ -422,7 +447,7 @@
   .mask1 li p{
     display: inline-block;
     width:20.75rem;
-    border-bottom: 0.0625rem solid #e4e4e4;
+    /*border-bottom: 0.0625rem solid #e4e4e4;*/
   }
   .mask1 li i{
     width: 1rem;

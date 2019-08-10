@@ -1,25 +1,9 @@
 <template>
       <van-tabbar>
         <ul class="foot">
-        <li>
-          <img v-if="isShow" src="../../../static/home-selected.png" alt="" @click=" changePage1">
-          <img v-else src="../../../static/home.png" >
-          <span>外卖</span>
-        </li>
-        <li>
-          <img v-if="isShow" src="../../../static/order.png" @click=" changePage2" >
-          <img v-else src="../../../static/order-selected.png" alt="">
-          <span>搜索</span>
-        </li>
-        <li>
-          <img v-if="isShow" src="../../../static/find.png" @click=" changePage3">
-          <img v-else src="../../../static/find-selected.png">
-          <span>订单</span>
-        </li>
-        <li>
-          <img v-if="isShow" src="../../../static/mine.png" @click=" changePage4">
-          <img v-else src="../../../static/mine-selected.png">
-          <span>我的</span>
+        <li v-for="(val,index) in arrSign" :key="index" @click=" changePage(index)">
+          <span :class="{'changeColor':isChange==index}"><i class="iconfont " v-html="val.name" ></i></span>
+          <span>{{val.role}}</span>
         </li>
         </ul>
       </van-tabbar>
@@ -30,25 +14,40 @@
         name: "Foot_dyx",
       data(){
           return{
-            isShow:true,
+            isChange:0,
+          //底部标记
+            arrSign:[
+              {name:"&#xe60a;",role:"外卖",isShow:0},
+              {name:"&#xe60b;",role:"搜索",isShow:1},
+              {name:"&#xe609;",role:"订单",isShow:2},
+              {name:"&#xe608;",role:"我的",isShow:3}
+            ]
           }
       },
       methods:{
-        changePage1(){
-          // this.isShow=false;
-          this.$router.push({path:"/fastFood"})
+        changePage(v){
+          // this.arrSign[v].isShow=true;
+          // console.log(this.arrSign[v].isShow);
+          switch(v) {
+            case 0:
+              this.isChange=0;
+              this.$router.push({path:"/fastFood"});
+              break;
+            case 1:
+              this.isChange=1;
+              this.$router.push({path:"/searchProduct"});
+              break;
+            case 2:
+              this.isChange=2;
+              this.$router.push({path:"/order_nj"});
+              break;
+            case 3:
+              this.isChange=3;
+              this.$router.push({path:"/mine"});
+              break;
+          }
         },
-        changePage2(){
-          this.$router.push({path:"/searchProduct"})
-        },
-        changePage3(){
-          this.$router.push({path:"/order"})
-        },
-        changePage4(){
-          this.$router.push({path:"/mine"})
-        }
       }
-
     }
 </script>
 
@@ -63,12 +62,17 @@
   width: 25%;
  float: left;
 }
-  .foot img{
+  .foot i{
     width: 1.1718rem;
-    margin-left:0.3rem ;
+    margin-left:0.3rem;
+    font-size: 1.3rem;
   }
-  .foot span {
+  .foot span:nth-child(2){
     display: block;
     font-size: 0.75rem;
+    margin-top: 0.3rem;
+  }
+  .changeColor{
+    color:#3190e8;
   }
 </style>

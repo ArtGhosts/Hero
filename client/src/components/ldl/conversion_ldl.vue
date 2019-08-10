@@ -44,9 +44,7 @@
 
 <style scoped>
   /*<!--下面布局-->*/
-  .botton{
 
-  }
   .botton p{
     font-size: 0.78rem;line-height: 1.2rem;
   }

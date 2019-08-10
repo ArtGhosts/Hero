@@ -3,7 +3,6 @@
     <div class="head">
       <van-nav-bar  left-arrow  title="我的" @click-left="onClickLeft"/>
     </div>
-
     <!--我的 : 分支1.登录注册-->
     <router-link :to="{path:'/login'}">
       <div class="event">
@@ -22,7 +21,6 @@
       </div>
       <div class="clearfix"></div>
     </router-link>
-
     <!--我的 : 分支2.余额-->
     <div class="money">
       <!--1-->
@@ -52,19 +50,18 @@
         </div>
       </router-link>
     </div>
-
     <!--积分订单,会员卡-->
     <div class="List ">
-      <van-cell is-link :to="{path:'/'}">
+      <van-cell is-link :to="{path:'/order_nj'}">
         <template slot="title">
-          <img src="../assets/imgs/列表.png"/><span class="custom-title">积分商城</span>
+          <img src="../assets/imgs/列表.png"/><span class="custom-title">我的订单</span>
         </template>
       </van-cell>
 
-      <van-cell  is-link :to="{path:'/'}">
+      <van-cell  is-link :to="{path:'/IntegralShop'}">
         <template slot="title">
           <i class="iconfont order">&#xe61a;</i>
-          <span class="custom-title">我的订单</span>
+          <span class="custom-title">积分商城</span>
         </template>
       </van-cell>
       <van-cell  is-link :to="{path:'/member_ldl'}">
@@ -86,15 +83,27 @@
           <img src="../assets/imgs/饿了么.jpg"/><span class="custom-title">下载饿了么APP</span>
         </template>
       </van-cell>
+
+      <!----------测试确认订单------------->
+      <van-cell  is-link :to="{path:'/Indent'}">
+        <template slot="title">
+          <img src="../assets/imgs/饿了么.jpg"/><span class="custom-title">确认订单</span>
+        </template>
+      </van-cell>
     </div>
+    <router-link :to="{path:'/account_ldl'}" style="background: white;width: 100%">跳转</router-link>
+    <!--底部-->
+    <Foot></Foot>
   </div>
 
 
 </template>
 
 <script>
+  import Foot from '../components/dyx/Foot_dyx'
   export default {
     name: "Mine",
+    components:{Foot},
     data(){
       return{
         name:"",

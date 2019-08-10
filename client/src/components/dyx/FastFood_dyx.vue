@@ -69,16 +69,20 @@ val.image_path" alt="">
           </li>
         </ul>
       </div>
+
+      <!--foot-->
+     <Foot></Foot>
     </div>
 </template>
 
 <script>
   //附近商家样式
   import  "../../assets/css/NearbyShopsStyle.css"
-
+  import Foot from './Foot_dyx'
   import Vue from 'vue';
     export default {
       name: "FastFood_dyx",
+      components:{Foot},
       data(){
           return{
           //  前8个商品分类
@@ -117,15 +121,15 @@ val.image_path" alt="">
         },
       //  点击跳转食品详情页
         ToProductDetails(val){
-          // console.log(val)
-          this.$router.push({path:'/ProductDetails',query:{Geohash:this.cityGeohash,id:val.id}})
+          // console.log(val);
+          this.$router.push({path:'/ProductDetails',query:{Geohash:this.cityGeohash,id:val.id}});
           //商品的全部信息
-          localStorage["proDetails"]=JSON.stringify(val)
+          localStorage["proDetails"]=JSON.stringify(val);
           this.$store.commit("productDetails",val)
         }
       },
       created(){
-        this.cityNa=this.$route.query.cityInfor;
+        this.cityNa= localStorage["oneNme"];
         //获取商品分类轮播的信息
         Vue.axios.get("https://elm.cangdu.org/v2/index_entry").then((result)=>{
           // console.log(result.data);

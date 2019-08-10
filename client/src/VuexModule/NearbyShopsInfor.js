@@ -14,6 +14,10 @@ const product={
     userInfor:JSON.parse(localStorage["userInfor"] || "{}"),
   //  商品属性的信息数据
     saveProNature:[],
+
+  //购物车页面商品数量及一些信息
+    addProductCount:JSON.parse(localStorage["addProductInfor"] || "[]"),
+
   },
   mutations:{
     getShopsInfor(state,res){
@@ -43,6 +47,45 @@ const product={
   //存储商品属性信息
     saveProductNature(state,payload){
       state.saveProNature.push(payload)
+    },
+    //加购的商品数量
+    addProduct(state,payload){
+      let ix;
+     let ifExic = state.addProductCount.find((foods,index)=>{
+       if(foods.item_id == payload.item_id)ix=index;
+        return foods.item_id == payload.item_id;
+      });
+      if(ifExic){
+        // console.log("数量加1");
+        state.addProductCount[ix].count++
+      }else {
+        // console.log("直接添加信息");
+        state.addProductCount.push(payload)
+      }
+      localStorage["addProductInfor"]=JSON.stringify(state.addProductCount);
+      console.log(state.addProductCount)
+    },
+
+  //删除商品，减少其数量
+    cutProduct(state,payload){
+      let index;
+      let isExist=state.addProductCount.find((v,i)=> {
+        if (v.item_id == payload.item_id)index = i;
+        return v.item_id == payload.item_id;
+      })
+        if(isExist){
+          if(state.addProductCount[index].count>1){
+            state.addProductCount[index].count--
+          }else{
+            state.addProductCount.splice(index)
+          }
+        }
+      localStorage["addProductInfor"]=JSON.stringify(state.addProductCount);
+        // console.log(state.addProductCount)
+    },
+  //清空购物车
+    emptyShopCart(){
+      this.addProductCount=[]
     }
   },
   actions:{
@@ -53,6 +96,11 @@ const product={
       }).then((result)=>{
         context.commit('getShopsInfor',result.data)
       })
+    },
+
+  //加购的商品数量
+    addProduct(context,payload){
+      context.commit("addProduct",payload)
     }
   }
 };

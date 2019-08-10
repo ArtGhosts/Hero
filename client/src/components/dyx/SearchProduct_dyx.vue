@@ -32,13 +32,17 @@
         <span @click="deleteHistory" class="del">清除历史</span>
       </div>
 
+      <!--foot-->
+      <Foot></Foot>
     </div>
 </template>
 
 <script>
   import Vue from 'vue'
+  import Foot from './Foot_dyx'
     export default {
         name: "SearchProduct_dyx",
+      components:{Foot},
       data(){
           return{
             //输入框的值

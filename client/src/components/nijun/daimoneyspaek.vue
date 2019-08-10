@@ -54,9 +54,6 @@
               if(b[i]=="*"){
                 b.splice(i,1,'')
               }
-                if(b[i]=='在个人中心'){
-                  b.splice(i+1,3,'我的红包>')
-                }
               }
             });
             return this.arry;
@@ -72,7 +69,7 @@
     height: 40rem;
   }
   .duan{
-    padding:1rem;
+    padding:.5rem;
   }
   .duan h3{
     margin:0.5rem 0;

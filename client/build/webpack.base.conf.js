@@ -64,8 +64,19 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
-    ]
+      },
+      //配置less
+      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+    //  配置css预处理器
+    //   {
+    //     test:/\.css$/,
+    //     loader:'style-loader!css-loader!stylus-loader'
+    //   }
+    ],
+    loaders: [{
+        test: /\.styl$/,
+        loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
+      }]
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
@@ -79,4 +90,7 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   }
+
 }
+
+

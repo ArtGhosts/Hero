@@ -16,7 +16,7 @@
             <span class="pull-left">当前积分</span>
             <span class="pull-right">
             <img src="../../assets/imgs/description.png"/>
-            <router-link :to="{path:'/Hongbao'}">积分说明</router-link>
+            <router-link :to="{path:'/jifenspeak'}">积分说明</router-link>
           </span>
           </div>
           <p class="InteTxt_tow">

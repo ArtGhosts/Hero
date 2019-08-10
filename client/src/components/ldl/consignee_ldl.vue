@@ -7,15 +7,18 @@
           <van-icon name="arrow-left" class="vant_top1" :to="{path:'/account_ldl'}"></van-icon>
         </router-link>
         <h4 class="cityNa" :to="{path:'/account_ldl'}">编辑地址</h4>
+        <h3 class="bj">编辑</h3>
       </div>
     </div>
 
-
-    <van-cell is-link style="border-top: 0.06rem solid rgba(0,0,0,0.2);border-bottom: 0.06rem solid rgba(0,0,0,0.2)" :to="{path:'/member/consignee_ldl'}" >
+    <hr style="margin-bottom: 0.6rem;margin-top: 0.6rem;background: rgba(0,0,0,0.4);">
+    <router-link :to="{path:'/member/compile_ldl'}">
+    <van-cell is-link style="border-top: 0.06rem solid rgba(0,0,0,0.2);border-bottom: 0.06rem solid rgba(0,0,0,0.2);">
       <template slot="title">
         <span class="custom-title">新增地址</span>
       </template>
     </van-cell>
+    </router-link>
   </div>
 
 </template>
@@ -33,6 +36,14 @@
 </script>
 
 <style scoped>
+  /*<!--编辑-->*/
+  .bj{
+    color: white;
+    position: absolute;
+    right: 0.5rem;
+    line-height: 3rem;
+    font-size: 1rem
+  }
   body,
   html {
     height: 100%;
@@ -71,9 +82,7 @@
     z-index: 10;
     font-weight: bold;
   }
-  .LmPass{
-    text-align: center;
-  }
+
   .LmPass input{
     padding-left: 0.6rem;
     margin: 0.7rem 0 0.7rem 0;
@@ -89,13 +98,6 @@
   }
   /*信息按钮*/
 
-  .xxan_L {
-
-    border-radius: 0.2rem;
-    width: 90%;
-    margin-top: 0.8rem;
-    height: 3rem;
-  }
   .xxan_L span{
     font-weight: 500;
     font-size: 1.1rem;

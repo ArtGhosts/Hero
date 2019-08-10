@@ -11,19 +11,20 @@
       </div>
       <!--输入框-->
       <div class="LmPass">
-        <input type="text" placeholder="请输入10位卡号"  >
-        <!--点击事件-->
-
-
-      </div>
+      <input type="text" placeholder="输入用户名" v-model="shuru" @input="mama()" class="div_input" :class="{'div_input1':solo}">
+    </div>
       <!--文字设置-->
       <div>
-        <span v-show="one">用户只能修改一次(5-24字符之间)</span>
+        <span v-show="one"  style="margin-left: 1rem">用户只能修改一次(5-24字符之间)</span>
+        <span v-show="two" style="color: red;margin-left: 1rem">用户长度在5-24字符之间</span>
       </div>
       <!--点击按钮-->
       <div style="text-align: center">
-        <van-button type="info" class="xxan_L">
-          <span>信息按钮</span>
+        <van-button  disabled  type="info" class="xxan_L" @click="dianji" :to="{path:'/account_ldl',query:{ID:shuru}}" v-show="therr">
+          <span>确认修改</span>
+        </van-button>
+          <van-button type="info" class="xxan_L" @click="dianji" :to="{path:'/account_ldl',query:{ID:shuru}}" v-show="four">
+            <span>确认修改</span>
         </van-button>
       </div>
     </div>
@@ -35,14 +36,86 @@
         name: "amend_ldl",
       data(){
           return{
-            one:true
+            //用来设置边框的颜色
+            one:true,
+            two:false,
+            solo:false,
+            therr:true,
+            four:false,
+            //获取到输入框的值
+            shuru:"",
+            mingzi1:"",
           }
+      },
+      // 方法
+      methods:{
+        //  判断事件,判断输入框内部内容是否大于5小于24并且更改颜色
+        mama() {
+          if (this.shuru.length >= 5) {
+            console.log("判断正确");
+            this.one=true;
+            this.two=false;
+            this.solo=false;
+            this.mingzi=this.shuru;
+            this.four=true;
+            this.therr=false;
+          } else if(this.shuru.length <= 24) {
+            console.log("判断错误");
+            this.one=false;
+            this.two=true;
+            this.solo=true;
+            this.therr=true
+            this.four=false
+
+          }
+        },
+        //当点击按钮的时候,获取到值并传送给前面
+        dianji(){
+          this.mingzi1=this.mingzi;
+          console.log(this.mingzi1);
+        }
 
       },
-    }
+
+      //计算属性
+      computed: {
+
+      },
+      //创建完毕的时候
+      created(){
+
+      },
+      //挂载的时候
+      mounted(){
+          }
+      }
+
+
+
+
 </script>
 
 <style scoped>
+  /*<!--input-->*/
+ .div_input{
+   padding-left: 0.6rem;
+   margin: 0.7rem 0 0.7rem 0;
+   border: 0.02rem solid rgba(0,0,0,0.3);
+   font-size: 1rem;
+   width: 90%;
+   background: #f2f2f2;
+   line-height: 2.6rem;
+ }
+  .div_input1{
+    padding-left: 0.6rem;
+    margin: 0.7rem 0 0.7rem 0;
+    border: 0.02rem solid red;
+    font-size: 1rem;
+    width: 90%;
+    background: #f2f2f2;
+    line-height: 2.6rem;
+  }
+
   body,
   html {
     height: 100%;
@@ -85,13 +158,7 @@
     text-align: center;
   }
   .LmPass input{
-    padding-left: 0.6rem;
-    margin: 0.7rem 0 0.7rem 0;
-    border: 0.02rem solid rgba(0,0,0,0.3);
-    font-size: 1rem;
-    width: 90%;
-    background: #f2f2f2;
-    line-height: 2.6rem;
+
   }
 
   .LmPass button{

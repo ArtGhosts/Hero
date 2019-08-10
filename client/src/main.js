@@ -18,7 +18,6 @@ import '@/assets/css/reset.css'
 //引入resize.js文件
 import '@/assets/js/resize.js'
 
-
 //引入vantUI组件
 import Vant from 'vant';
 import 'vant/lib/index.css';
@@ -37,13 +36,16 @@ axios.interceptors.request.use(
     return Promise.error(error);
   });
 
-
+//引入vuex与localStorage
+import createPersistedState from 'vuex-persistedstate'
 
 //引入VueX状态管理
 import VueX from  'vuex'
 import ShopsInfor from './VuexModule/NearbyShopsInfor'
 Vue.use(VueX);
 const store= new VueX.Store({
+  //将vuex与localStorage组合，自动会把vuex中的数据保存到localStorage
+  plugins:[createPersistedState()],
   modules:{
     shopsInfor:ShopsInfor,
   }

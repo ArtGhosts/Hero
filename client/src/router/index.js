@@ -15,8 +15,14 @@ import ProductHome from  "@/components/dyx/ProductHome"
 
 //外卖->食品分类->食品详情
 import FastFood from  "@/components/dyx/FastFood_dyx"
+//商品分类
 import FastFoodCategroy from  "@/components/dyx/FastFood_categroy_dyx"
+//商品详情
 import ProductDetails from  "@/components/dyx/ProductDetails_dyx"
+//所有商品
+import AllProducts from  "@/components/dyx/AllProducts_dyx"
+//所有评论
+import AllReview from  "@/components/dyx/AllReview_dyx"
 
 
 
@@ -25,9 +31,9 @@ import SearchCity from  "@/components/ldl/SearchCity_ldl"
 
 //搜索商品
 import SearchProduct from  "@/components/dyx/SearchProduct_dyx"
-//订单
-import ProductOrder from  "@/components/ProductOrder"
 
+//订单列表
+import order_nj from "@/components/nijun/order_nj"
 //我的->我的余额
 import Mine from  "@/components/Mine"
 import Balance from  "@/components/nijun/Mine_balance"
@@ -48,6 +54,8 @@ import exchangeHB from "@/components/nijun/exchangeHB"
 import Recommend from "@/components/nijun/Recommend"
 //积分
 import Integral from "@/components/nijun/Integral_nj"
+//确认订单
+import Indent from "@/components/nijun/Indent_nj"
 //--------------------------------------------------------------------
 
 
@@ -69,7 +77,11 @@ import purchase_ldl from "@/components/ldl/purchase_ldl"
 import amend_ldl from "@/components/ldl/amend_ldl"
 //编辑地址
 import consignee_ldl from "@/components/ldl/consignee_ldl"
-
+import account_ldl from "@/components/ldl/account_ldl"
+//新增地址
+import compile_ldl from "@/components/ldl/compile_ldl"
+//创建新的地址
+import SearchCity_lgl_one from "@/components/ldl/SearchCity_lgl_one"
 
 
 export default new Router({
@@ -91,11 +103,15 @@ export default new Router({
         //食品分类
         {path:'/FastFoodCategroy',component:FastFoodCategroy},
         //食品详情
-        {path:'/ProductDetails',component:ProductDetails},
+        {path:'/ProductDetails',component:ProductDetails,children:[
+            {path:'/',redirect:'AllProduct'},
+            {path:'AllProduct',component:AllProducts},
+            {path:'AllReview',component:AllReview}
+          ]},
         //搜索
         {path:'/searchProduct',component:SearchProduct,name:'searchProduct'},
-        //订单
-        {path:'/order',component:ProductOrder},
+        // 订单列表(nijun)
+        {path:'/order_nj',component:order_nj},
         //我的
         {path:'/mine',component:Mine},
         //我的余额
@@ -127,6 +143,9 @@ export default new Router({
         {path:'/Recommend',component:Recommend},
         // 积分
         {path:'/Integral',component:Integral},
+        //确认订单
+        {path:"/Indent",component:Indent},
+
       ]},
         //------------------------------------------------------------------------------
         {path:"/member/Discounts_ldl",component:Discounts_ldl},
@@ -134,10 +153,15 @@ export default new Router({
         {path:"/member/record_ldl",component:record_ldl},
         {path:"/member/conversion_ldl",component:conversion_ldl},
         {path:"/member/purchase_ldl",component:purchase_ldl},
-        //修改用户名
-        {path:"/memberend/amend_ldl",component:amend_ldl},
+        {path:'/account_ldl',component:account_ldl},
+    //修改用户名
+        {path:"/member/amend_ldl",component:amend_ldl},
         // 编辑地址
         {path:"/member/consignee_ldl",component:consignee_ldl},
+        // 新增地址
+        {path:"/member/compile_ldl",component:compile_ldl},
+        //新建新的地址搜索
+        {path:"/member/SearchCity_lgl_one",component:SearchCity_lgl_one},
 
   ]
 })

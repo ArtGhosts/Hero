@@ -28,7 +28,7 @@
         <h4>热门城市</h4>
         <div class="hot">
           <ul v-for="(val,index) in hotCity" :key="index">
-            <li class="pull-left"><router-link :to="{name:'city',params:{cityID:val.id,cityName:val.name}}">{{val.name}}</router-link></li>
+            <li class="pull-left" @click=" changePage(val)"><span>{{val.name}}</span></li>
           </ul>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <li  v-for="(val,index) in upperA" :key="index" class="uppcity">
               <h4>{{index}}</h4>
               <ul v-for="(value,index) in val" :key="index" class="address">
-                  <li><router-link :to="{name:'city',params:{cityID:value.id,cityName:value.name}}" >{{value.name}}</router-link></li>
+                <li class="pull-left" @click=" changePage(value)"><span>{{value.name}}</span></li>
               </ul>
               <div class="clearfix"></div>
             </li>
@@ -75,6 +75,12 @@
             newObj[index]=obj[index];
           }
           return newObj
+        },
+      //  获取城市
+        changePage(value){
+          localStorage["selectCityName"]=value.name;
+          this.$router.push({name:'city',params:{cityID:value.id,cityName:value.name}})
+
         }
       },
 
@@ -110,7 +116,6 @@
             this.upperA=a
         })
         }
-
     }
 </script>
 
@@ -230,7 +235,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .address>li a{
-     color:black;
-  }
+  /*.address>li {*/
+     /*color:black;*/
+  /*}*/
 </style>

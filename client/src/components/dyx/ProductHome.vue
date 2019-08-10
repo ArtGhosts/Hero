@@ -3,18 +3,15 @@
       <transition name="fade" mode="out-in">
         <RouterView></RouterView>
       </transition>
-      <Foot></Foot>
     </div>
 </template>
 
 <script>
   import FastFood from './FastFood_dyx'
-  import Foot from './Foot_dyx'
     export default {
         name: "ProductHome",
       components: {
           FastFood,
-          Foot
         }
     }
 </script>

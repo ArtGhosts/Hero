@@ -6,34 +6,37 @@
         <router-link :to="{path:'/mine'}">
           <van-icon name="arrow-left" class="vant_top1" :to="{path:'/mine'}"></van-icon>
         </router-link>
-        <h4 class="cityNa" :to="{path:'/mine'}">下载</h4>
+        <h4 class="cityNa" :to="{path:'/mine'}">账户信息</h4>
       </div>
     </div>
+
     <!--头像设置-->
     <div>
       <div class="ka">
         <van-uploader class="qing1" >
-          <van-cell is-link title="头像" style="width: 23.48rem;height: 5rem;line-height: 5">
+          <van-cell is-link title="头像" style="width: 23.48rem;height: 4.5rem;line-height: 3rem" id="touxiang">
             <template>
-              <span class="custom-title"><img src="../../assets/imgs/default.jpg" height="50" width="50" style="border-radius: 50%" /></span>
+              <span class="custom-title">
+                <img src="../../assets/imgs/default.jpg" height="47" width="47" style="border-radius: 50%" />
+              </span>
             </template>
           </van-cell>
         </van-uploader>
       </div>
-      <div><img id="tou" style="margin-left: 0.3rem" src=""/></div>
-      <van-icon name="arrow"  class="fei"/>
+      <div><img id="tou" style="margin-left: 0.3rem" src="" /></div>
+      <van-icon name="arrow" class="fei" />
     </div>
     <!--用户名-->
-    <div style="background: honeydew;border-top: 0.06rem solid rgba(0,0,0,0.2)">
-      <van-cell is-link title="用户名">
-        <template slot="">
-          <span class="custom-title">123123</span>
+    <div class="yonghuming">
+      <van-cell is-link title="用户名" :to="{path:'/member/amend_ldl'}"  class="custom">
+        <template >
+          <span class="custom">{{span_id}}</span>
         </template>
       </van-cell>
       <!--收货地址-->
-      <van-cell is-link style="border-top: 0.06rem solid rgba(0,0,0,0.2);border-bottom: 0.06rem solid rgba(0,0,0,0.2)" :to="{path:'/member/consignee_ldl'}" >
+      <van-cell is-link class="shouhuo" :to="{path:'/member/consignee_ldl'}">
         <template slot="title">
-          <span class="custom-title">收货地址</span>
+          <span class="custom">收货地址</span>
         </template>
       </van-cell>
     </div>
@@ -54,13 +57,13 @@
     </van-cell>
     <!--点击按钮-->
     <div class="alert text-center LmAlert button">
-      <van-button type="primary" v-show="mama_one" @click="mama1_one" class="click_1">下载</van-button>
+      <van-button type="primary" v-show="mama_one" @click="mama1_one" class="click_1">退出登录</van-button>
       <!--即将消息的标签-->
       <transition enter-active-class="animated bounceIn" leave-active-class="">
         <div class="click_1_div" v-show="baba">
           <img src="../../assets/jinggaokuang.png" height="100" width="100" />
           <p>ISO用户请前往AppStore下载</p>
-          <button class="btn btn-success btn-group btn-block" @click="baba1" style="margin-top: 1rem">确认</button>
+          <button class="btn btn-success btn-group btn-block  anniu" @click="baba1">确认</button>
         </div>
       </transition>
     </div>
@@ -68,19 +71,20 @@
       <transition enter-active-class="animated bounceIn">
         <div class="click_1_div" v-show="baba_one">
           <img src="../../assets/jinggaokuang.png" height="100" width="100" />
-          <h1 style="margin-top: 1rem">是否退出登录</h1>
-          <button class="btn btn-success btn-group this_button" @click="baba1_one" style="background: #c1c1c1;border: #c1c1c1">再等等</button>
-          <button class="btn btn-success btn-group this_button" @click="baba1_one" style="background: #dd6b55;border: black">退出登录</button>
+          <h1>是否退出登录</h1>
+          <button class="btn btn-success btn-group this_button" @click="baba1_one">再等等</button>
+          <button class="btn btn-success btn-group this_button1" @click="baba1_one">退出登录</button>
         </div>
       </transition>
     </div>
+
   </div>
 </template>
 
 <script>
   import "../../../node_modules/animate.css/animate.css"
   export default {
-      name: "account_ldl",
+    name: "account_ldl",
     data() {
       return {
         show: true,
@@ -90,6 +94,8 @@
         mama_one: true,
         baba_one: false,
         yes: false,
+        // 用户名
+        span_id: "",
 
       }
 
@@ -111,54 +117,88 @@
         this.yes = false
       },
 
+    },
+    created() {
+      this.span_id = this.$route.query.ID;
+      console.log(this.span_id)
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+  /*设置用户名,收货地址等的行高*/
+  .custom{
+    line-height: 1.75rem;
+  }
+  /*是否退出登录设置*/
+  h1 {
+    margin-top: 1rem
+  }
+  /*头像*/
+  .touxiang {
+    width: 23.48rem;
+    height: 5rem;
+    line-height: 5
+  }
+  /*用户名*/
+
+  .yonghuming {
+    border-top: 0.06rem solid rgba(0, 0, 0, 0.2)
+  }
+  /*收货地址*/
+
+  .shouhuo {
+    border-top: 0.06rem solid rgba(0, 0, 0, 0.2);
+    border-bottom: 0.06rem solid rgba(0, 0, 0, 0.2)
+  }
   /*<!--边框-->*/
-  .biankuang{
-    border-top: 0.03rem solid rgba(0,0,0,0.3);
-    border-bottom: 0.03rem solid rgba(0,0,0,0.3);
+
+  .biankuang {
+    border-top: 0.03rem solid rgba(0, 0, 0, 0.3);
+    border-bottom: 0.03rem solid rgba(0, 0, 0, 0.3);
   }
-  .van-cell{
-    line-height: 2rem;
-  }
-  .qing1 i{
+
+  .qing1 i {
     line-height: 4.4em;
   }
-  i{
-    line-height: 2.1rem;
+
+  i {
+    line-height: 1.6rem;
   }
-  .ka [data-v-4f5d381e]:before{
+
+  .ka [data-v-4f5d381e]:before {
     margin-top: 0.1rem;
     width: 100%;
   }
-  .qing1{
+
+  .qing1 {
     line-height: 5rem;
     width: 100%;
-    margin-top: 0.7rem;
-    border-top: 0.06rem solid rgba(0,0,0,0.4);
+    margin-top: 0.5rem;
+    border-top: 0.06rem solid rgba(0, 0, 0, 0.4);
   }
 
-  #tou{
+  #tou {
     border-radius: 50%;
     width: 0.6rem;
     position: absolute;
     z-index: 1;
     top: 0.6rem;
     left: 2.5rem;
-
   }
-  .fei{
+  /*按钮*/
+
+  .anniu {
+    margin-top: 1rem
+  }
+
+  .fei {
     position: absolute;
     right: 0.15rem;
     top: 0.8rem;
     z-index: 1;
     font-size: 0.24rem;
   }
-
-
   /*<!--确认取消按钮样式-->*/
 
   .conceal {
@@ -175,34 +215,26 @@
   .this_button {
     margin: 3rem 1rem 0 1rem;
     width: 5rem;
-    background: white;
+    background: #c1c1c1;
+    border: #c1c1c1
+  }
 
+  .this_button1 {
+    margin: 3rem 1rem 0 1rem;
+    width: 5rem;
+    background: #dd6b55;
+    border: black
   }
   /*两个span标签*/
 
   .span_one {
-    line-height: 3rem;
+    line-height: 2.4rem;
     padding-left: 1rem;
+    font-size: 0.6rem;
   }
 
   img {
     vertical-align: middle;
-  }
-
-  /*点击按钮*/
-
-  .click_1 {
-    width: 95%;
-    border-radius: .2rem;
-    background: #db584a;
-    border:#db584a ;
-  }
-
-  body,
-  html {
-    height: 100%;
-    width: 100%;
-    background: white;
   }
 
   .search i {
@@ -244,16 +276,18 @@
   /*d点击按钮外面div*/
 
   .button {
-    height: 5rem;
-    width: 100%;
     text-align: center;
-    margin-top: 0.3rem;
+    margin-top: 1rem;
   }
   /*点击按钮*/
 
   .click_1 {
-    width: 95%;
-    border-radius: .2rem
+    width: 100%;
+    border-radius: 0.4rem;
+    background: #db584a;
+    border: #db584a;
+    height: 2.1rem;
+    line-height: 2.1rem;
   }
   /*里面的div*/
 
