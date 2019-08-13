@@ -2,7 +2,7 @@
   <div class="indent">
     <!--小兰头-->
     <div class="topnj">
-      <router-link :to="{path:'/mine'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/ProductDetails'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
       <div class="denglu">
         确认订单
       </div>
@@ -11,10 +11,10 @@
     <!--订单页面头部-->
     <!-- 添加新的收货地址 -->
     <div class="addSite">
-
-    <router-link :to="{path:''}">
+    <router-link :to="{path:'/Shop_Address'}">
         <img src="../../assets/imgs/coord.png" alt="请升级浏览器">
-        <span>新增收货地址</span>
+        <span>{{addre1}}</span>
+      <span style="margin-left: .5rem">{{addre2}}</span>
         <div class="addGoBack"></div>
       <div class="clearfix"></div>
     </router-link>
@@ -48,91 +48,21 @@
     <!--小头像-->
     <div class="imgtop">
       <header data-v-4e0d5034="">
-        <img data-v-4e0d5034="" src="//elm.cangdu.org/img/16b5ac632a846021.jpg" style="width: 2rem">
-        <span class="spname">李倩</span>
+        <img data-v-4e0d5034="" :src="'//elm.cangdu.org/img/'+shops.image_path" style="width: 2rem">
+        <span class="spname">{{shops.name}}</span>
       </header>
     </div>
     <!-- 结算内容 -->
     <div class="total">
       <!-- 展示被结算的内容 -->
-      <table class="shopping">
-        <tr class="shoppingSUM">
+      <table class="shopping" >
+        <tr class="shoppingSUM" v-for="(it) in  arderinfo">
           <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
+          <td class="commom">{{it.name}}</td>
           <!-- 商品数量 -->
-          <td class="count">x1</td>
+          <td class="count">x {{it.count}}</td>
           <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>      <tr class="shoppingSUM">
-        <!-- 商品名称 -->
-        <td class="commom">小女孩</td>
-        <!-- 商品数量 -->
-        <td class="count">x1</td>
-        <!-- 商品价格 -->
-        <td class="price">¥998</td>
-      </tr>      <tr class="shoppingSUM">
-        <!-- 商品名称 -->
-        <td class="commom">小女孩</td>
-        <!-- 商品数量 -->
-        <td class="count">x1</td>
-        <!-- 商品价格 -->
-        <td class="price">¥998</td>
-      </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
-        </tr>
-        <tr class="shoppingSUM">
-          <!-- 商品名称 -->
-          <td class="commom">小女孩</td>
-          <!-- 商品数量 -->
-          <td class="count">x1</td>
-          <!-- 商品价格 -->
-          <td class="price">¥998</td>
+          <td class="price">{{it.specfoods[0].price}}</td>
         </tr>
 
       </table>
@@ -140,34 +70,35 @@
     <!-- 餐盒 -->
     <div class="lunchBox clearfix">
       <span>餐盒</span>
-      <span class="lunchBox02">¥ 400000</span>
+      <span class="lunchBox02" >{{postage}}</span>
     </div>
 
     <!--订单-->
     <div class="order">
-      <span class="p">订单 ￥400000</span>
+      <span class="p">订单 {{allmoney}}</span>
       <!--待支付-->
       <div class="unpaid">
         <span>待支付
           <br>
-          <b>￥400000</b>
+          <b>￥{{allmoney}}</b>
         </span>
       </div>
     </div>
+
     <!-- 配送费 -->
     <div class="road clearfix">
       <span>配送费</span>
-      <span class="roadBox02">¥ 5</span>
+      <span class="roadBox02">¥ {{shops.float_delivery_fee}}</span>
     </div>
     <div class="clearfix"></div>
     <div class="division"></div>
 
     <!--订单备注-->
       <section  class="notes">
-        <router-link :to="{path:''}">
+        <router-link :to="{path:'/beizhu'}">
           <span class="notes_span">订单备注</span>
           <div class="more_type pull-right">
-            <span>啥都要</span>
+            <span>{{beizhu}}</span>
             <img src="../../assets/imgs/右箭头灰色.png" alt="">
           </div>
           <div class="clearfix"></div>
@@ -189,7 +120,7 @@
     <!-- 结算栏 -->
     <div class="finally clearfix">
       <span class="fina01">待支付 :</span>
-      <span class="finMoney">¥ 400000</span>
+      <span class="finMoney">¥{{allmoney}}</span>
       <span class="finLogo"></span>
       <span class="thatSure" @click="sureOrder">确认下单</span>
     </div>
@@ -197,13 +128,53 @@
 </template>
 
 <script>
+  import Vue from 'vue';
   export default {
     name: "Indent_nj",
+    data(){
+      return{
+        shops:{},
+        arderinfo:[],
+        postage:'10000000',
+        allmoney:0,
+        addre1:'请选择地址',
+        addre2:'',
+        beizhu:"",
+      }
+    },
     methods:{
       sureOrder(){
-        this.$router.push({path:'/member/purchase_ldl'})
+        this.$router.push({path:'/daojishi'})
       }
-    }
+    },
+   created(){
+      this.shops=JSON.parse(localStorage["proDetails"]);
+     // console.log(localStorage["proDetails"]);
+   this.arderinfo = this.$store.state.shopsInfor.addProductCount;
+     // console.log(this.$store.state.shopsInfor.addProductCount);
+     let allPrice=0;
+      for(let i in this.arderinfo){
+        allPrice+=this.arderinfo[i].count*this.arderinfo[i].specfoods[0].price
+     }
+     this.allmoney=allPrice+Number(this.postage)+Number(this.shops.float_delivery_fee)
+    },
+    mounted() {
+      this.addre1=localStorage["addressName"];
+      console.log(this.$store.state.useraddr);
+      let m = this.$store.state.shopid;
+      Vue.axios.get(`https://elm.cangdu.org/shopping/restaurant/${m}`).then((res) => {
+          console.log(res.data)
+        }
+      )
+      if( this.$store.state.useraddr !== '' ){
+        this.addre2 = this.$store.state.useraddr
+      }else{
+        this.addre2 = '请填写收货地址'
+      }
+      // 获取备注
+      this.beizhu=this.$route.query.hcuanzhi;
+    },
+
   }
 </script>
 
@@ -222,7 +193,7 @@
   }
   /*返回按钮*/
   .back{
-    font-size: 1.4rem;
+    font-size: 1rem;
     line-height: 2.856rem;
     margin-left:.5rem;
   }
@@ -259,7 +230,6 @@
     background-position:center center ;
     background-size: cover;
     float: right;
-    margin-top: 1.5rem;
     margin-right: 1rem;
 
   }
@@ -468,7 +438,6 @@
     background-position: right center;
     background-size:cover;
     vertical-align: middle;
-
   }
 
   .fenge{
@@ -477,7 +446,7 @@
   /*结算栏*/
   .finally{
     width: 100%;
-    height: 8%;
+    height: 3rem;
     background: rgb(80,66,66);
     position: fixed;
     bottom: 0;

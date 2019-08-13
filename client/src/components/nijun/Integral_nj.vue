@@ -88,10 +88,11 @@
   .footer p:nth-child(3){
     font-size: 0.5rem;
     color: #aaaaaa;
+    margin-top: .5rem;
   }
   .footer p:nth-child(2){
     font-size: 0.7rem;
-    margin-top: 0.8rem;
+    margin-top: 1rem;
   }
   .footer img{
     width:15rem;

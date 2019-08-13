@@ -23,7 +23,8 @@ import ProductDetails from  "@/components/dyx/ProductDetails_dyx"
 import AllProducts from  "@/components/dyx/AllProducts_dyx"
 //所有评论
 import AllReview from  "@/components/dyx/AllReview_dyx"
-
+//每一个商品信息
+import EveryProductInfor from  "@/components/dyx/EveryProductInfor_dyx"
 
 
 import SearchCity from  "@/components/ldl/SearchCity_ldl"
@@ -39,7 +40,7 @@ import Mine from  "@/components/Mine"
 import Balance from  "@/components/nijun/Mine_balance"
 import Detail from "@/components/nijun/detail"
 //我的->优惠->红包明细
-import Benefit from "@/components/nijun/Benefit"
+import Benefit from "@/components/nijun/benefit"
 import HongBao from "@/components/nijun/HongBao"
 // /明细->历史红包
 import hbDescription from "@/components/nijun/hbDescription"
@@ -54,8 +55,19 @@ import exchangeHB from "@/components/nijun/exchangeHB"
 import Recommend from "@/components/nijun/Recommend"
 //积分
 import Integral from "@/components/nijun/Integral_nj"
-//确认订单
+//确认订单页面
 import Indent from "@/components/nijun/Indent_nj"
+// 收获地址
+import Shop_Address from "@/components/nijun/Shop_Address"
+//添加地址
+import Select_Address from "@/components/nijun/Select_Address"
+//获取城市位置
+import Select_Position from '@/components/nijun/Select_Position'
+import daojishi from "@/components/nijun/daojishi"
+//积分问题
+import jifenspeak from "@/components/nijun/jifenspeak_nj"
+//积分商城
+import IntegralShop from "@/components/nijun/IntegralShop_nj"
 //--------------------------------------------------------------------
 
 
@@ -83,6 +95,9 @@ import compile_ldl from "@/components/ldl/compile_ldl"
 //创建新的地址
 import SearchCity_lgl_one from "@/components/ldl/SearchCity_lgl_one"
 
+//备注
+import beizhu from "@/components/ldl/beizhu"
+
 
 export default new Router({
   routes: [
@@ -108,6 +123,8 @@ export default new Router({
             {path:'AllProduct',component:AllProducts},
             {path:'AllReview',component:AllReview}
           ]},
+        //每一个商品的详情
+        {path:'/EveryProductInfor',component:EveryProductInfor},
         //搜索
         {path:'/searchProduct',component:SearchProduct,name:'searchProduct'},
         // 订单列表(nijun)
@@ -143,8 +160,21 @@ export default new Router({
         {path:'/Recommend',component:Recommend},
         // 积分
         {path:'/Integral',component:Integral},
-        //确认订单
+        //积分问题
+        {path:'/jifenspeak',component:jifenspeak},
+        // 添加收货地址
+        {path:"/IntegralShop",component:IntegralShop},
+        //确认订单页面
         {path:"/Indent",component:Indent},
+        //确认订单收获地址
+        {path:"/Shop_Address",component:Shop_Address},
+        //获取地址页面
+        {path:'/Select_Position',component:Select_Position},
+        //倒计时
+        {path:'/daojishi',component:daojishi},
+        // 添加收货地址
+        {path:"/Select_Address",component:Select_Address},
+
 
       ]},
         //------------------------------------------------------------------------------
@@ -162,6 +192,8 @@ export default new Router({
         {path:"/member/compile_ldl",component:compile_ldl},
         //新建新的地址搜索
         {path:"/member/SearchCity_lgl_one",component:SearchCity_lgl_one},
+       //备注
+        {path:"/beizhu",component:beizhu}
 
   ]
 })

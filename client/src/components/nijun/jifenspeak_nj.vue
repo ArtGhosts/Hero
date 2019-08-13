@@ -2,7 +2,7 @@
   <div class="jfspack">
     <!--小蓝头部-->
     <div class="head">
-      <van-nav-bar  left-arrow  title="余额问题" @click-left="onClickLeft"/>
+      <van-nav-bar  left-arrow  title="积分说明" @click-left="onClickLeft"/>
     </div>
     <div class="duan">
 
@@ -65,7 +65,7 @@
 <style scoped>
   .jfspack{
     background: white;
-    height: 40rem;
+    height: 41.5rem;
   }
   .duan{
     padding:1rem;

@@ -68,7 +68,7 @@
   .backgroundnj{
     background: white;
     width: 100%;
-    height: 36rem;
+    height: 38.7rem;
   }
 .duan{
   padding: 0.5rem;

@@ -3,9 +3,8 @@
       <!--头部-->
       <div class="top">
         <span class="leftText">ele.me</span>
-        <span class="pull-right login">
-          <router-link :to="{path:'/login'}">登录|注册</router-link>
-        </span>
+        <span class="pull-right login" v-if="Object.keys(name).length == 0 " @click="loginOrUser(1)">登录|注册</span>
+        <span class="pull-right login" v-else><i class="iconfont" @click="loginOrUser(2)">&#xe608;</i></span>
         <div class="empty clearfix"></div>
       </div>
 
@@ -36,7 +35,7 @@
       <!--全部城市-->
       <div class="allCity">
           <ul>
-            <li  v-for="(val,index) in upperA" :key="index" class="uppcity">
+            <li v-for="(val,index) in upperA" :key="index" class="uppcity">
               <h4>{{index}}</h4>
               <ul v-for="(value,index) in val" :key="index" class="address">
                 <li class="pull-left" @click=" changePage(value)"><span>{{value.name}}</span></li>
@@ -62,6 +61,8 @@
             upperA:{},
           //城市首字符，城市数组
             upperACity:[],
+          //
+            name:{},
           }
       },
       methods:{
@@ -80,8 +81,15 @@
         changePage(value){
           localStorage["selectCityName"]=value.name;
           this.$router.push({name:'city',params:{cityID:value.id,cityName:value.name}})
-
-        }
+        },
+      //  点击跳转
+        loginOrUser(v){
+          if(v==1){
+            this.$router.push({path:'/login'})
+          }else{
+            this.$router.push({path:'/mine'})
+          }
+        },
       },
 
         created(){
@@ -133,6 +141,7 @@
 }
 .login{
   font-size: 0.9375rem;
+  margin-right: 0.5rem;
 }
 
 /*当前城市*/

@@ -43,7 +43,7 @@
                   <span>{{food.name}}</span>
                   <span class="count">{{food.count}}</span>
                 </li>
-                <li v-for="(val,index) in categoryList" :key="index" @click="foodDetails(index)" :class="{'changeColor':isShow}">
+                <li v-for="(val,index) in categoryList" :key="index" @click="foodDetails(index)" :class="{'changeColor':currentIndex==index}" >
                   <img :src="getImgPath(val.image_url)">
                   <span>{{val.name}}</span>
                   <span>{{val.count}}</span>
@@ -63,7 +63,7 @@
           <transition enter-active-class="animated slideInDown" leave-active-class="animated fade" mode="out-in">
           <ul class="mask mask1" v-if="isChange2">
             <li v-for="(val,index) in sortProduct" :key="index" @click="reSortProduct(index+1)">
-              <span><i class="iconfont" :class="{'color1':'true'}" v-html="val.sign"></i></span>
+              <span :style="{'color':val.color}"><i class="iconfont" :class="{'color1':'true'}" v-html="val.sign"></i></span>
               <p class="pull-right">
                 <span class="pull-left">{{val.name}}</span>
               <span v-if="val.select" class="deleteB pull-right"><i class="iconfont" :style="{color:'#3190e4'}">&#xe65b;</i></span></p>
@@ -100,11 +100,9 @@
             </div>
           </transition>
       </div>
-
-
         <!--商品信息-->
         <div class="productInform">
-          <ul v-for="(val,index) in listOfNearbyMerchants" :key="index" class="nearbyShops">
+          <ul v-for="(val,index) in listOfNearbyMerchants" :key="index" class="nearbyShops" @click="changePage">
             <li>
               <img :src="'//elm.cangdu.org/img/'+
   val.image_path" alt="">
@@ -164,7 +162,7 @@
             selectBtn: "全部",
             //  异国料理
             food: {},
-            isShow: false,
+            // isShow: false,
             //分类内容
             isChange1: false,
             //排序内容
@@ -177,12 +175,12 @@
             isChangeSend: false,
             //排序数组
             sortProduct: [
-              {sign: '&#xe60f;', name: "智能排序",select:false},
-              {sign: '&#xe600;', name: "距离最近",select:false},
-              {sign: '&#xe6d4;', name: "销量最高",select:false},
-              {sign: '&#xe605;', name: "起送价最低",select:false},
-              {sign: '&#xe63b;', name: "配送速度最快",select:false},
-              {sign: '&#xe65d;', name: "评分最高",select:false},
+              {sign: '&#xe60f;', name: "智能排序",select:false,color:"#3b87c8"},
+              {sign: '&#xe600;', name: "距离最近",select:false,color:"#3b87c8"},
+              {sign: '&#xe6d4;', name: "销量最高",select:false,color:"#f07373"},
+              {sign: '&#xe605;', name: "起送价最低",select:false,color:"#e6b61a"},
+              {sign: '&#xe63b;', name: "配送速度最快",select:false,color:"#37c7b7"},
+              {sign: '&#xe65d;', name: "评分最高",select:false,color:"#e6b61a"},
             ],
             // 商家所有属性
             allShopSelect: [
@@ -194,11 +192,17 @@
               {sign: '&#xe607;', name: "开发票", select: true},
             ],
             allCount:'',
+          // 当前下标
+            currentIndex:0,
           }
       },
       methods: {
         onClickLeft() {
           this.$router.push({path: '/FastFood'})
+        },
+        //点击跳转到商品
+        changePage(){
+          this.$router.push({path:'/ProductDetails'})
         },
         //点击箭头显示内容
         clickPoint() {
@@ -222,6 +226,7 @@
 
         //点击酚类出现相应的内容
         foodDetails(index) {
+          this.currentIndex=index;
           // this.isShow=true;
           this.allFood = this.categoryList[index].sub_categories
           console.log(this.allFood)
@@ -303,7 +308,6 @@
         //下拉列表收回
           this.isChange2=false
         }
-
       },
       computed:{
         //商品属性数量
@@ -411,22 +415,6 @@
     font-size: 0.75rem;
   }
 
-  /*//  排序中图标颜色*/
-      .color1{
-      color:#3b87c8;
-      }
-  .color2{
-    color:#f07373;
-  }
-  .color3{
-    color:#e6b61a;
-  }
-  .color4{
-    color:#37c7b7;
-  }
-.color5{
-  color:#3190e8
-}
 .mask{
    width: 100%;
    height: 36.4875rem;

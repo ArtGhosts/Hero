@@ -36,9 +36,14 @@ axios.interceptors.request.use(
     return Promise.error(error);
   });
 
+
 //引入vuex与localStorage
 import createPersistedState from 'vuex-persistedstate'
 
+//引入饿了么ui库
+import ElementUI from 'element-ui' //element-ui的全部组件
+import 'element-ui/lib/theme-chalk/index.css'//element-ui的css
+Vue.use(ElementUI);//使用elementUI
 //引入VueX状态管理
 import VueX from  'vuex'
 import ShopsInfor from './VuexModule/NearbyShopsInfor'

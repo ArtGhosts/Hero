@@ -30,7 +30,7 @@
     <div class="yonghuming">
       <van-cell is-link title="用户名" :to="{path:'/member/amend_ldl'}"  class="custom">
         <template >
-          <span class="custom">{{span_id}}</span>
+          <span class="custom">{{name.username}}</span>
         </template>
       </van-cell>
       <!--收货地址-->
@@ -73,7 +73,7 @@
           <img src="../../assets/jinggaokuang.png" height="100" width="100" />
           <h1>是否退出登录</h1>
           <button class="btn btn-success btn-group this_button" @click="baba1_one">再等等</button>
-          <button class="btn btn-success btn-group this_button1" @click="baba1_one">退出登录</button>
+          <button class="btn btn-success btn-group this_button1" @click="baba1_two">退出登录</button>
         </div>
       </transition>
     </div>
@@ -82,6 +82,7 @@
 </template>
 
 <script>
+  import Vue from "vue"
   import "../../../node_modules/animate.css/animate.css"
   export default {
     name: "account_ldl",
@@ -95,7 +96,7 @@
         baba_one: false,
         yes: false,
         // 用户名
-        span_id: "",
+        name: "",
 
       }
 
@@ -114,13 +115,25 @@
       },
       baba1_one() {
         this.baba_one = false;
-        this.yes = false
+        this.yes = false;
+
       },
+      baba1_two() {
+        this.baba_one = false;
+        this.yes = false;
+        Vue.axios.get("https://elm.cangdu.org/v2/signout").then((result)=>{
+          console.log(result);
+        });
+        this.$router.push({path:"/mine"});
+        this.$store.commit("deleteUsername")
+      },
+
 
     },
     created() {
       this.span_id = this.$route.query.ID;
-      console.log(this.span_id)
+      // console.log(this.span_id)
+      this.name=this.$store.state.shopsInfor.userInfor;
     }
   }
 </script>

@@ -117,10 +117,10 @@
             this.isShow=true;
           }else{
             // 将用户名存储到localStorage
-            localStorage["userInfor"]=JSON.stringify(userIn);
+            localStorage["userInfor"]=JSON.stringify(result.data);
             // 将用户名存储到用VueX中
             this.$router.push({path:"/mine"});
-            this.$store.commit("saveInfor",userIn);
+            this.$store.commit("saveInfor",result.data);
           }
         }).catch((err)=>{
           console.log(err)

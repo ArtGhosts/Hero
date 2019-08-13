@@ -1,18 +1,37 @@
 <template>
+  <transition name="fade" mode="out-in">
     <div>
-      <transition name="fade" mode="out-in">
         <RouterView></RouterView>
-      </transition>
+        <Loading v-show="isShow"></Loading>
     </div>
+  </transition>
+
 </template>
 
 <script>
   import FastFood from './FastFood_dyx'
+  import Loading from './LoadingPage_dyx'
     export default {
         name: "ProductHome",
+      data(){
+          return{
+            isShow:true
+          }
+      },
       components: {
           FastFood,
-        }
+        Loading,
+        },
+      computed:{
+          loading(){
+            setTimeout(()=>{
+              this.isShow=false
+            },2000)
+          }
+      },
+      created(){
+        this.loading
+      }
     }
 </script>
 

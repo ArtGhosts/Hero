@@ -34,21 +34,21 @@
 
 <style scoped>
   .tsbox img {
-    margin-top: 1rem;
-    width: 4.5rem;
-    height: 4.5rem;
+    margin-top: 2rem;
+    width: 5rem;
+    height: 5rem;
   }
 
-  .tsbox p {
-    font-size: .9rem;
-    margin-top: .8rem;
+  .tsbox p{
+    font-size: 1rem;
+    margin-top: 1.5rem;
     margin-bottom: -.5rem;
   }
 
   .tsbox {
     width: 16rem;
     height: 11rem;
-    border-radius: 0.2rem;
+    border-radius: 0.5rem;
     position: absolute;
     top: 12rem;
     left: 3.9rem;
@@ -59,7 +59,7 @@
     width: 100%;
     background-color: #4cd964;
     color: white;
-    border-radius: 0.2rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     outline: none!important;
     border: 0;
     margin-top: 1.8rem;

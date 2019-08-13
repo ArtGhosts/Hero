@@ -17,6 +17,9 @@
 .head span, .head i{
   color: white !important;
 }
+.head i{
+  font-size: 1.4rem;
+}
 .cityNa{
   display: inline-block;
   width: 11.718rem;

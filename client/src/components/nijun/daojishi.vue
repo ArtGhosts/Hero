@@ -3,10 +3,10 @@
     <!--顶部操作-->
     <div class="search">
       <div class="top_L">
-        <router-link :to="{path:'/member'}">
-          <van-icon name="arrow-left" class="vant_top1" :to="{path:'/member'}"></van-icon>
+        <router-link :to="{path:'/Indent'}">
+          <van-icon name="arrow-left" class="vant_top1"></van-icon>
         </router-link>
-        <h4 class="cityNa" :to="{path:'/member'}">我的优惠</h4>
+        <h4 class="cityNa">在线支付</h4>
       </div>
     </div>
     <!--剩余时间-->
@@ -17,22 +17,22 @@
     <div class="pay_way">选择支付方式</div>
     <div>
       <van-radio-group v-model="radio" class="group" >
-        <div class="zfb1">
-          <img src="../../assets/imgs/alipay.png" height="30" width="30" style="border-radius: 50%;margin-left: 1rem;margin-right: 1rem;margin-top: 0.6rem"/>
-          <van-cell title="支付宝" class="van" >
-          </van-cell>
+        <div class="zfb">
+          <van-cell title="支付宝"  class="van" />
           <van-radio name="1" class="fk" checked-color="#07c160"></van-radio>
         </div>
         <div class="zfb">
-          <img src="../../assets/imgs/weixin.png" height="30" width="30" style="border-radius: 50%;margin-left: 1rem;margin-right: 1rem;vertical-align: middle;margin-top: 0.6rem"/>
-          <van-cell title="微信" class="van" />
+          <van-cell title="微信"  class="van" />
           <van-radio name="2" class="fk" checked-color="#07c160"></van-radio>
         </div>
       </van-radio-group>
     </div>
     <div class="alert  text-center LmAlert   button">
-      <van-button type="primary"  class="click_1" :class="{btn:true}" @click="under()">下载</van-button>
-  </div>
+      <router-link :to="{path:'order_nj'}">
+      <van-button type="primary"  class="click_1" :class="{btn:true}" @click="under()">确认支付</van-button>
+      </router-link>
+
+    </div>
     <PromptBox v-show='isHide' :childCom="SetTxt" @childEvent="Show($event)"></PromptBox>
   </div>
 
@@ -43,7 +43,7 @@
 <script>
   import PromptBox from "../nijun/PromptBox"
   export default {
-    name: "invoicerecord",
+    name: "daojishi",
     components:{PromptBox},
     data() {
       return {
@@ -80,9 +80,6 @@
 </script>
 
 <style scoped>
-  .fk{
-    width: 4rem;
-  }
   /*<!--顶部操作-->*/
   .search i {
     color: white;
@@ -118,7 +115,7 @@
 
 
   }
-/*计时器*/
+  /*计时器*/
   .content{
     background: white;
     text-align: center;
@@ -140,22 +137,7 @@
     display: flex;
     background: white;
     height: 3rem;
-    border-bottom: 0.01rem solid #f1f1f1;
-
-  }
-  .van-cell__title{
-    border-bottom: 0.01rem solid #f1f1f1;
-  }
-  .zfb1{
-    display: flex;
-    background: white;
-    height: 3rem;
-    border-bottom: 0.02rem solid #f1f1f1;
-  }
-  .van{
-    padding: 0;
-    line-height: 3rem;
-    /*padding-left: 1rem;*/
+    padding-right: 1rem;
   }
 
 

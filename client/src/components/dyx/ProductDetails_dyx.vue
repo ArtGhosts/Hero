@@ -48,7 +48,7 @@ proDetails.image_path" alt="">
           //商品详情信息
             proDetails:{},
           //商品变换样式
-            isShow1:false,
+            isShow1:true,
             //评价变换样式
             isShow2:false,
           //是否改变
@@ -91,7 +91,10 @@ proDetails.image_path" alt="">
     color:white;
     font-size: 0.9rem;
 
-
+    .center{
+      width: 100%;
+      background: url();
+    }
     /*图片*/
     img{
       width: 4.2418rem;

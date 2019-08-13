@@ -75,14 +75,16 @@
 }
 /*送*/
 .salesVolume .send{
+  display: inline-block;
   background: #3190e8;
   border:0.0625rem solid #3190e8;
   font-size: 0.75rem;
   color:white;
-  margin-left:2.5rem;
+  margin-left:2.6rem;
 }
 /*到达*/
 .salesVolume .arrive{
+  display: inline-block;
   border:0.0625rem solid #3190e8;
   font-size: 0.75rem;
   color:#3190e8;
@@ -96,6 +98,9 @@
   display: inline-block;
   color: #000;
   margin-right: 0.5rem;
+}
+.money span:nth-child(2){
+  margin-left: 3.8rem;
 }
 .money span:nth-child(3){
   color: #3190e8;

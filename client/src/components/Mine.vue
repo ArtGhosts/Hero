@@ -4,23 +4,23 @@
       <van-nav-bar  left-arrow  title="我的" @click-left="onClickLeft"/>
     </div>
     <!--我的 : 分支1.登录注册-->
-    <router-link :to="{path:'/login'}">
-      <div class="event">
+      <div class="event" @click="changeEvent">
         <div class="borderHead pull-left ">
-          <i class="iconfont" style="font-size: 4rem;color:gainsboro">&#xe72b;</i>
+          <img v-if="Object.keys(name).length != 0 " src="../assets/imgs/default.jpg" style="border-radius: 50%"/>
+          <i v-else class="iconfont" style="font-size: 4rem;color:gainsboro">&#xe72b;</i>
         </div>
         <div class="pull-left textnj">
-          <p>{{Object.keys(name).length== 0 ?"登录|注册":name.name}}</p>
+          <p>{{Object.keys(name).length == 0 ?"登录|注册":name.username}}</p>
           <span>
                <i class="iconfont" style="font-size: 1.5rem;color:gainsboro">&#xe64d;</i>
               暂无绑定手机号
           </span>
         </div>
         <!--阿里图标-->
-        <van-icon name="arrow" class="pull-right"style="line-height: 4rem"/>
+          <van-icon name="arrow" class="pull-right"style="line-height: 4rem" />
       </div>
       <div class="clearfix"></div>
-    </router-link>
+
     <!--我的 : 分支2.余额-->
     <div class="money">
       <!--1-->
@@ -35,7 +35,7 @@
       <!--2-->
       <router-link :to="{path:'/benefit'}">
         <div class="youhui">
-          <span class="youhuinj">0</span>
+          <span class="youhuinj">{{Object.keys(name).length== 0 ? 0:hongbaocount}}</span>
           <span class="black">个</span>
           <h5>我的优惠</h5>
         </div>
@@ -83,15 +83,8 @@
           <img src="../assets/imgs/饿了么.jpg"/><span class="custom-title">下载饿了么APP</span>
         </template>
       </van-cell>
-
-      <!----------测试确认订单------------->
-      <van-cell  is-link :to="{path:'/Indent'}">
-        <template slot="title">
-          <img src="../assets/imgs/饿了么.jpg"/><span class="custom-title">确认订单</span>
-        </template>
-      </van-cell>
     </div>
-    <router-link :to="{path:'/account_ldl'}" style="background: white;width: 100%">跳转</router-link>
+
     <!--底部-->
     <Foot></Foot>
   </div>
@@ -107,14 +100,24 @@
     data(){
       return{
         name:"",
+        hongbaocount:0,
       }
     },
     methods:{
       onClickLeft(){
         this.$router.go(-1)
+      },
+      changeEvent(){
+        if(Object.keys(this.name).length==0){
+          this.$router.push({path:'/login'})
+        }else{
+          this.$router.push({path:'/account_ldl'})
+        }
       }
     },
     created(){
+      this.hongbaocount=localStorage["hongbaocount"];
+      console.log( this.hongbaocount);
       this.name=this.$store.state.shopsInfor.userInfor;
       console.log(this.$store.state.shopsInfor.userInfor)
     }
@@ -138,9 +141,16 @@
   /*登录注册头像*/
   .borderHead{
     width: 4.5rem;
+    height: 4.5rem;
     background-color: white;
     border-radius: 50%;
     border: .2rem solid #3190e8;
+    text-align: center;
+  }
+  .borderHead img{
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
   }
   .textnj{
     width:10rem;

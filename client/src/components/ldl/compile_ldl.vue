@@ -41,7 +41,7 @@
       <van-button   type="info" class="xxan_L1"   v-show="F1"  @click="dianji">
         <span>确认修改</span>
       </van-button>
-      <van-button   type="info" class="xxan_L"  :to="{path:'/member/consignee_ldl',}" v-show="F2" >
+      <van-button   type="info" class="xxan_L"  v-show="F2" >
         <span>确认修改</span>
       </van-button>
     </div>
@@ -104,6 +104,11 @@
         cityGeohash_one:"",
       //  经纬度
         geohash_ldl:"",
+      //  准备传递的值
+        A1_model:"",
+        B1_model:"",
+        C1_model:"",
+        D1_model:"",
       }
     },
     //方法
@@ -118,12 +123,15 @@
       },
       //点击事件
       dianji(){
-        this.baba=true;
-        Vue.axios.post("https://elm.cangdu.org/v1/users/37109/addresses",{
+        // console.log(this.B_model);
+        // console.log(this.C_model);
+
+
+        Vue.axios.post("https://elm.cangdu.org/v1/users/"+this.ID_ldl+"/addresses",{
           // 地址
           address:this.cityGeohash_one[0].name,
           // 地址详情
-          address_detail:this.B_model,      
+          address_detail:this.B_model,
           // 经纬度
           geohash:this.geohash_ldl,
           // 收货人姓名
@@ -140,25 +148,62 @@
           tag_type:1,
           }
         ).then((result) => {
-            console.log(result.data.message)
-          if(result.data.message="详细地址信息错误"){
-              console.log("aishdaishdaisd")
-            this.AA="详细地址信息错误"
+            console.log(result.data);
+          //  如果
+          if(result.data.success=="添加地址成功"){
+            this.$router.push({path:"/member/consignee_ldl",query:{ID:this.B1_model,NAME:this.C1_model}})
+            this.baba=false;
+
+
+
+          }else{
+              if(this.A_model==""){
+                this.AA="姓名为空";
+                console.log(this.AA)
+              }else
+            if(this.C_model.length<=0||this.C_model.length>11){
+              this.AA="请填写手机号";
+              console.log(this.AA)
+            }else
+            {
+              this.AA="请填写详细的地址";
+              console.log(this.AA)
+            }
+
+
+
+
+
+
+
+
+
+
+            this.baba=true;
+            console.log("开始判断");
+
           }
-          
-          
+
+
+          //
+          // if(result.data.message="详细地址信息错误"){
+          //   this.AA="详细地址信息错误"
+          // } if (result.data.message="收货手机号错误"){
+          //   this.AA="请输入正确的手机号"
+          // } if(result.data.message="收货人姓名错误"){
+          //   this.AA="请输入姓名"
+          // } if(result.data.status!=0){
+          //   this.AA="可以跳转";
+          //   this.B1_model=this.B_model;
+          //     this.C1_model=this.C_model;
+          //   console.log("可以跳转");
+          //
+          // }
+          // console.log( this.B1_model,this.C1_model);
         })
-        // console.log("点击到按钮")
-        // if(this.A_model.length>0||this.B_model.length>2||this.C_model.length<11){
-        //   // console.log(this.A_model,"获取到A的值");
-        //   // console.log(this.B_model,"获取到B的值");
-        //   console.log(this.C_model,"获取到C的值");
-        //   // console.log(this.D_model,"获取到D的值")
-        //
-        // }
+
+
       },
-
-
       A_input(){
         if(this.A_model.length>0){
           this.A1=false;
@@ -183,7 +228,7 @@
             this.B2=false;
             this.B_class=true;
           }
-          // 如果等于零
+
         }else{
           this.B_class=false;
           this.B1=false;
@@ -201,7 +246,7 @@
           this.C1=true;
           this.C_class=true;
         }else {
-          this.C1=false
+          this.C1=false;
           this.C_class=false;
         }
       },
@@ -216,22 +261,20 @@
           this.D1=true;
           this.D_class=true;
         }else {
-          this.D1=false
+          this.D1=false;
           this.D_class=false;
         }
         }
       },
 
     created(){
-      // console.log();
       this.id_ldl=this.$store.state.shopsInfor.userInfor;
+      console.log(this.id_ldl);
       this.ID_ldl=this.id_ldl.user_id;
       console.log(this.ID_ldl);
       this.cityGeohash_one=JSON.parse(localStorage.getItem('name'));
       console.log(this.cityGeohash_one);
-      this.geohash_ldl=this.cityGeohash_one[0].geohash
-      console.log(this.geohash_ldl);
-      console.log(this.name = this.$store.state.shopsInfor.userInfor);
+      this.geohash_ldl=this.cityGeohash_one[0].geohash;
     }
     }
 

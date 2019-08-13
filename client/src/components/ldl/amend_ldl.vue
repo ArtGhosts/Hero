@@ -11,7 +11,7 @@
       </div>
       <!--输入框-->
       <div class="LmPass">
-      <input type="text" placeholder="输入用户名" v-model="shuru" @input="mama()" class="div_input" :class="{'div_input1':solo}">
+      <input type="text" placeholder="输入用户名" v-model="name" @input="mama()" class="div_input" :class="{'div_input1':solo}">
     </div>
       <!--文字设置-->
       <div>
@@ -20,10 +20,10 @@
       </div>
       <!--点击按钮-->
       <div style="text-align: center">
-        <van-button  disabled  type="info" class="xxan_L" @click="dianji" :to="{path:'/account_ldl',query:{ID:shuru}}" v-show="therr">
+        <van-button  disabled  type="info" class="xxan_L" @click="dianji" :to="{path:'/account_ldl',query:{ID:name}}" v-show="therr">
           <span>确认修改</span>
         </van-button>
-          <van-button type="info" class="xxan_L" @click="dianji" :to="{path:'/account_ldl',query:{ID:shuru}}" v-show="four">
+          <van-button type="info" class="xxan_L" @click="dianji" :to="{path:'/account_ldl',query:{ID:name}}" v-show="four">
             <span>确认修改</span>
         </van-button>
       </div>
@@ -43,7 +43,7 @@
             therr:true,
             four:false,
             //获取到输入框的值
-            shuru:"",
+            name:"",
             mingzi1:"",
           }
       },
@@ -51,23 +51,23 @@
       methods:{
         //  判断事件,判断输入框内部内容是否大于5小于24并且更改颜色
         mama() {
-          if (this.shuru.length >= 5) {
+          if (this.name.length >= 5) {
             console.log("判断正确");
             this.one=true;
             this.two=false;
             this.solo=false;
-            this.mingzi=this.shuru;
+            this.mingzi=this.name;
             this.four=true;
             this.therr=false;
-          } else if(this.shuru.length <= 24) {
+          } else if(this.name.length <= 24) {
             console.log("判断错误");
             this.one=false;
             this.two=true;
             this.solo=true;
-            this.therr=true
+            this.therr=true;
             this.four=false
-
           }
+          this.$store.commit("changeUserName",this.name)
         },
         //当点击按钮的时候,获取到值并传送给前面
         dianji(){
@@ -83,11 +83,9 @@
       },
       //创建完毕的时候
       created(){
-
+        this.name=this.$store.state.shopsInfor.userInfor.username;
       },
-      //挂载的时候
-      mounted(){
-          }
+
       }
 
 

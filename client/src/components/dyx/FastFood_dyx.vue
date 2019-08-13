@@ -4,10 +4,12 @@
       <!--头部导航-->
       <div class="allhead">
         <div class="head">
-          <van-nav-bar right-text="登录|注册"   @click-left="onClickLeft" @click-right="onClickRight">
+          <van-nav-bar  @click-left="onClickLeft">
             <van-icon name="search" slot="left" />
           </van-nav-bar>
           <router-link :to="{path:'/'}"><span class="cityNa">{{cityNa}}</span></router-link>
+          <span class="login" v-if="Object.keys(name).length == 0 " @click="loginOrUser(1)">登录|注册</span>
+          <span class="login" v-else @click="loginOrUser(2)"><i class="iconfont">&#xe608;</i></span>
         </div>
       </div>
 
@@ -56,8 +58,9 @@ val.image_path" alt="">
                   <van-rate v-model="val.rating" allow-half void-icon="star"  void-color="#eee" :count="5"/>
                 <span class="rate">{{val.rating}}</span>
                 <span>月销{{val.recent_order_num}}单</span>
-                <span class="send">蜂鸟专送</span>
-                <span class="arrive">准时达</span>
+                <span class="arrive pull-right">准时达</span>
+                <span class="send pull-right">蜂鸟专送</span>
+
               </div>
               <!--商品第三行-->
               <div class="money">
@@ -93,11 +96,10 @@ val.image_path" alt="">
           //  搜索城市页面传来的城市名字
             cityNa:"",
 
-          //  附近商家列表
-          //   listOfNearbyMerchants: this.$store.state.pInfor,
-
           //  城市的经纬度
-            cityGeohash:""
+            cityGeohash:"",
+          //  用户信息
+            name:{},
           }
       },
       computed:{
@@ -108,10 +110,15 @@ val.image_path" alt="">
       },
       methods: {
         onClickLeft() {
-          this.$router.push({path:'/login'});
+          this.$router.push({path:'/searchProduct'});
         },
-        onClickRight() {
-          this.$router.push({path:"/login"});
+      //  登录页面和我的页面跳转
+        loginOrUser(v){
+          if(v==1){
+            this.$router.push({path:'/login'})
+          }else{
+            this.$router.push({path:'/mine'})
+          }
         },
       //  点击跳转传值
         changeFast(val){
@@ -129,7 +136,7 @@ val.image_path" alt="">
         }
       },
       created(){
-        this.cityNa= localStorage["oneNme"];
+        this.cityNa= JSON.parse(localStorage.getItem('name'))[0].name;
         //获取商品分类轮播的信息
         Vue.axios.get("https://elm.cangdu.org/v2/index_entry").then((result)=>{
           // console.log(result.data);
@@ -139,17 +146,8 @@ val.image_path" alt="">
         }).catch((err)=>{
           console.log(err)
         });
-
-
-      //  根据传过来的经纬度确定城市名字
-      //   console.log(this.$route.query.cityGeohash);
-        this.cityGeohash=this.$route.query.cityGeohash;
-        Vue.axios.get("https://elm.cangdu.org/v2/pois/"+this.$route.query.cityGeohash).then((result)=>{
-          // console.log(result.data);
-          this.cityNa=result.data.name;
-        }).catch((err)=>{
-          console.log(err)
-        })
+      //  获取用户信息
+        this.name=this.$store.state.shopsInfor.userInfor;
 
       },
       mounted(){
@@ -188,13 +186,23 @@ val.image_path" alt="">
    left:20%;
   color: white;
   z-index: 10;
-  color: white;
   font-size: 1.2rem;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+ /*登录注册*/
+  .login{
+    display: inline-block;
+    position: absolute;
+    top: 1rem;
+    right:5%;
+    color: white;
+    z-index: 10;
+    font-size: 1.2rem;
+    text-align: center;
+  }
 
  /*轮播*/
  .lunBo{

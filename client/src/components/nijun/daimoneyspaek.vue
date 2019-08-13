@@ -66,7 +66,7 @@
 
   .daijin{
     background: white;
-    height: 40rem;
+    height: 41.6rem;
   }
   .duan{
     padding:.5rem;

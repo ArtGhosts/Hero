@@ -29,7 +29,7 @@ const product={
     },
     productDetails(state,payload){
       state.productDetailInfor=payload;
-      console.log(state.productDetailInfor)
+      // console.log(state.productDetailInfor)
     },
     //存储搜索信息
     saveValue(state,payload){
@@ -51,13 +51,13 @@ const product={
     //加购的商品数量
     addProduct(state,payload){
       let ix;
-     let ifExic = state.addProductCount.find((foods,index)=>{
-       if(foods.item_id == payload.item_id)ix=index;
-        return foods.item_id == payload.item_id;
-      });
+     let ifExic = state.addProductCount.find((value,index)=> {
+       if(value.item_id==payload.item_id)ix=index;
+       return  value.item_id==payload.item_id
+     });
       if(ifExic){
         // console.log("数量加1");
-        state.addProductCount[ix].count++
+        state.addProductCount[ix].count=payload.count
       }else {
         // console.log("直接添加信息");
         state.addProductCount.push(payload)
@@ -65,6 +65,7 @@ const product={
       localStorage["addProductInfor"]=JSON.stringify(state.addProductCount);
       console.log(state.addProductCount)
     },
+
 
   //删除商品，减少其数量
     cutProduct(state,payload){
@@ -84,8 +85,18 @@ const product={
         // console.log(state.addProductCount)
     },
   //清空购物车
-    emptyShopCart(){
-      this.addProductCount=[]
+    emptyShopCart(state){
+      state.addProductCount=[];
+    },
+  // 修改用户名
+    changeUserName(state,payload){
+      state.userInfor.username=payload;
+    },
+  //  删除用户信息
+    deleteUsername(state){
+      state.userInfor={};
+      console.log( state.userInfor)
+      // localStorage["userInfor"]=JSON.stringify(state.userInfor)
     }
   },
   actions:{

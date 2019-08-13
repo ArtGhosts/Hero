@@ -1,7 +1,7 @@
 <template>
     <div class="DaiJinQuan">
       <div class="clearfix">
-        <span style="font-size: 0.5rem; padding: 0.5rem 0.6rem;;display: inline-block" class="pull-right">
+        <span style="font-size: .9rem; padding: 0.5rem 0.6rem;;display: inline-block" class="pull-right">
           <img src="@/assets/imgs/description.png" class="des"/>
           <router-link :to="{path:'/daimoneyspaek'}">商家代金券说明</router-link>
         </span>

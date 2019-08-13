@@ -30,10 +30,15 @@
                 <span>{{goods.description}}</span>
               </div>
               <ul class="phone-type">
-                <li v-for="(value,index) in goods.foods" :key="index" id="lists">
-                  <img :src="'//elm.cangdu.org/img/'+value.image_path" alt="" class="picture">
+                <li v-for="(value,index) in goods.foods" :key="index" class="lists">
+                  <!--新品-->
+                  <div  class="newPro" v-if="value.attributes[0] && value.attributes[0].icon_name==='新'">{{value.attributes[0].icon_name}}品</div>
+                  <img :src="'//elm.cangdu.org/img/'+value.image_path" alt="" class="picture" @click="productInfor(value)">
                   <div class="list">
-                    <h4 id="texts">{{value.name}}</h4>
+                    <h4 id="texts">
+                      <span>{{value.name}}</span>
+                      <span class="shopSign pull-right" v-if="value.attributes[1] && value.attributes[1].icon_name==='招牌'">{{value.attributes[1].icon_name}}</span>
+                      </h4>
                     <!--第二行-->
                     <div class="sale">
                       <span>月售{{value.month_sales}}份</span>
@@ -48,7 +53,8 @@
                         <span @click="cutProducts(value)"><i class="iconfont changeColor">&#xe657;</i></span>
                         <span>{{value.count}}</span>
                       </div>
-                      <span @click="addProducts(value)" class="pull-right"><i class="iconfont changeColor" >&#xe64e;</i></span>
+                      <span class="pull-right standard" v-if="value.specifications[0]||value.specifications[0]==='规格'" @click="selectStandard(value)">选{{value.specifications[0].name}}</span>
+                      <span @click="addProducts(value)" class="pull-right" v-else><i class="iconfont changeColor" >&#xe64e;</i></span>
                     </div>
                   </div>
                 </li>
@@ -76,13 +82,11 @@
         <span v-else @click="payMoney">去结算</span>
       </div>
     </div>
-
-
-    <!--蒙板-->
+    <!--购物车蒙板-->
     <transition enter-active-class="animated fade" leave-active-class="animated fade" mode="out-in">
-      <div class="mask" v-if="isShowShopCartProduct">
-        <transition enter-active-class="animated slideInUp" leave-active-class="animated slideInDown" mode="out-in">
-            <ul>
+      <div class="mask" v-if="isShowShop">
+        <!--购物车蒙板-->
+            <ul v-if="isShowShopCartProduct">
               <li v-if="isShopCart">
                 <span>购物车</span>
                 <div class="pull-right" @click="makeShopCartEmpty">
@@ -105,7 +109,22 @@
                 </div>
               </li>
             </ul>
-        </transition>
+        <!--选规格的蒙板-->
+           <div class="select" v-if="isShowStandard">
+              <header>
+                <span>{{productStandard.name}}</span>
+                <span class="cross pull-right" @click="exit"><i class="iconfont" >&#xe602;</i></span>
+              </header>
+             <h5>{{productStandard.specifications[0].name}}</h5>
+             <div class="selectStandard">
+               <span @click="selectFood(index)" :class="{'changeColor':index==current}" v-for="(val,index) in productStandard.specfoods" :key="index">{{val.specs_name}}</span>
+             </div>
+             <div class="money">
+               <span v-if="isShowPrice" class="textColor">￥{{productStandard.specfoods[0].price}}</span>
+               <span v-else class="textColor">￥{{productStandard.specfoods[1].price}}</span>
+               <span class="addCart pull-right">加入购物车</span>
+             </div>
+           </div>
       </div>
     </transition>
   </div>
@@ -119,15 +138,14 @@
         name: "AllProducts",
       data(){
           return{
-            //购买商品数量
-            count:'1',
+            //是否展示新品
+            isShow:false,
             // 所有商品
             searchgoods:[],
             //右侧列表滑动的y轴坐标
             scrollY:0,
             //所有分类头部位置
             rightLiTops:[],
-
           //配送费
             float_delivery_fee:'',
           //结算切换
@@ -140,6 +158,15 @@
             shopCartProduct:[],
           //是否展示购物车第一行
             isShopCart:true,
+          // 是否展示规格蒙板
+            isShowShop:false,
+          //获取点击规格商品信息
+            productStandard:{},
+          //显示不同规格的价钱
+            isShowPrice:true,
+          //当前点击的规格
+            current:0,
+            isShowStandard:false
           }
       },
       methods:{
@@ -147,24 +174,34 @@
         payMoney(){
           this.$router.push({path:'/Indent'})
         },
+        //点击获取商品详情
+        productInfor(value){
+          console.log(value);
+          localStorage["EveryProductInfor"]=JSON.stringify(value);
+          this.$router.push({path:"/EveryProductInfor"})
+        },
         //点击减少商品数量
         cutProducts(v){
               if(v.count==1){
                 v.isShow=false;
                 // this.shopCartProduct.splice(v)
                 //不显示蒙板
+                this.isShowShop=false;
                 this.isShowShopCartProduct=false;
               }
           this.$store.commit("cutProduct",v)
         },
         //点击添加商品数量
-        addProducts(v){
-          v.isShow=true;
+        addProducts(v) {
+          v.isShow = true;
           //点击某个商品获取商品的信息，并添加一个count属性，记录商品的数量
-          if(!v.count){
-            this.$set(v,"count",1);
+          if (!v.count) {
+            this.$set(v, "count", 1);
+          } else {
+            v.count++
           }
-          this.$store.dispatch("addProduct",v);
+          // console.log(v.this.proDetails.item_id);
+          this.$store.dispatch("addProduct", v);
         },
         //点击清空购物车
         makeShopCartEmpty(){
@@ -173,20 +210,24 @@
           //不显示购物车信息中购物车该列
           this.isShopCart=false;
           //不显示蒙板
+          this.isShowShop=false;
           this.isShowShopCartProduct=false;
         // 不显示左边热销榜的数量，底部购物车的颜色和数量以及结算
-          this.isChang1=true
+          this.isChang1=true;
+          this.shopCartProduct=[]
         },
         //点击展示购物车商品
         isShowShopInfor(){
-
+          this.isShowStandard=false;
           // console.log(this.shopCartProduct);
           if(this.shopCartProduct.length==0){
+            this.isShowShop=false;
             this.isShowShopCartProduct=false
           }else{
             //显示购物车信息中购物车该列
             this.isShopCart=true;
-            this.isShowShopCartProduct=!this.isShowShopCartProduct
+            this.isShowShopCartProduct=!this.isShowShopCartProduct;
+            this.isShowShop=true
           }
         },
         //商品滚动
@@ -202,7 +243,6 @@
             probeType: 3
           });
         },
-
         clickList(index){
           // alert(1)
           this.scrollY = this.rightLiTops[index];
@@ -243,6 +283,28 @@
           }
           return {num:num,allFee:allFee}
         },
+      //点击选规格获取商品
+        selectStandard(value){
+          console.log(value);
+          //显示蒙板
+          this.isShowShop=true;
+          this.isShowStandard=true;
+        //点击商品信息
+          this.productStandard=value
+        },
+        //退出选规格
+        exit(){
+          this.isShowShop=false;
+          this.isShowStandard=true;
+        },
+      //点击获取商品规格
+        selectFood(v){
+          this.current=v
+        },
+      //点击添加
+      //   addProductToCart() {
+      //     console.log(this.productStandard.specfoods[this.current]);
+      //   },
       },
       watch:{
         searchgoods(){
@@ -281,6 +343,7 @@
       created(){
         //获取店铺信息
         this.proDetails=JSON.parse(localStorage["proDetails"]);
+        // console.log(this.proDetails)
         this.float_delivery_fee=this.proDetails.float_delivery_fee;
 
         //获取店铺中加购的商品的数据
@@ -289,8 +352,8 @@
 
         //获取商品
         Vue.axios.get("https://elm.cangdu.org/shopping/getcategory/"+this.proDetails.id).then((result)=>{
-          // console.log(result.data.category_list);
-          this.searchgoods=result.data.category_list
+          console.log(result.data.category_list);
+          this.searchgoods=result.data.category_list;
         }).catch((err)=>{
           console.log(err)
         });
@@ -391,7 +454,7 @@
         .phone-type
           width 100%
 
-          #lists
+          .lists
             padding 1rem 0
             border-bottom 0.0625rem solid #e4e4e4 !important
           .list
@@ -505,7 +568,7 @@
     .newFoot
       background #4cd964
 
-  /*购物车蒙板*/
+  /*蒙板*/
   .mask{
     width: 100%;
     height:38.76rem;
@@ -515,7 +578,65 @@
     left:0;
     z-index 10
   }
+  /*选规格*/
+  .select
+    height 12.43rem
+    width  16.56rem
+    background white
+    margin 12rem auto
+    border-radius 0.5rem
+    .selectStandard
+      width 100%
+      padding 0 0.5rem
+      margin-top 2rem
+      .changeColor
+          color #3190e8
+          border 0.0625rem solid #3190e8
+      span
+        border 0.0625rem solid #ddd
+        padding 0.6rem 0.7rem
+        color #333
+        margin-left 0.5rem
+        border-radius 0.3rem
 
+    .money
+        width 100%
+        height 3.375rem
+        line-height 3.375rem
+        background #f9f9f9
+        font-size 1rem
+        border-radius 0 0 0.5rem 0.5rem
+        margin-top 3rem
+    .addCart
+      display inline-block
+      height 1.875rem
+      text-align center
+      line-height 1.875rem
+      width 5.625rem
+      background #3190e8
+      color  white
+      font-size 0.75rem
+      border-radius 0.3rem
+      margin-right 0.5rem
+      margin-top 0.8rem
+    .textColor
+        margin-left 1rem
+        color #ff6000
+        font-size 1.25rem
+        font-weight bold
+
+
+    header
+      width 100%
+      text-align center
+      padding 1rem
+      margin-bottom 0.8rem
+      font-size 1rem
+    h5
+     margin 1rem 1rem
+
+
+  /*购物车蒙板*/
   .mask ul{
     width: 100%;
     background: #eceff1;
@@ -530,14 +651,14 @@
   .mask ul li{
     width: 100%;
     height:2.8125rem;
-    line-height:2.8125rem;
-    padding:0 0.85rem;
+    /*line-height:2.8125rem;*/
+    padding: 0.85rem;
   }
 
   .productInShop{
     width: 100%;
     height:2.8125rem;
-    line-height:2.8125rem;
+    /*line-height:2.8125rem;*/
     font-weight: bold;
     background: white;
   }
@@ -550,5 +671,44 @@
   .changeColor{
     color:#3190e8;
   }
+
+
+//新品
+.lists{
+  position :relative;
+  overflow:hidden;
+}
+  .newPro{
+    width:3rem;
+    text-align:center;
+    background:#5ec452;
+    padding-top:2rem;
+    color:white;
+   transform:rotateZ(-45deg);
+    font-size:0.75rem;
+    position:absolute;
+    top:-1.5rem;
+    left:-1.5rem;
+  }
+.shopSign
+  display inline-block
+  width 2.5rem
+  text-align center
+  font-size 0.75rem
+  color #f07373
+  border 0.0625rem solid #f07373
+  border-radius 0.8rem
+.standard
+  display inline-block
+  width 3.125rem
+  height 1.48rem
+  line-height 1.48rem
+  color white
+  background #3190e8
+  border-radius 0.3rem
+  text-align center
+  font-size 0.75rem
+
+
 
 </style>
