@@ -119,14 +119,14 @@
                   <van-rate v-model="val.rating" allow-half void-icon="star"  void-color="#eee" :count="5"/>
                   <span class="rate">{{val.rating}}</span>
                   <span>月销{{val.recent_order_num}}单</span>
-                  <span class="send">蜂鸟专送</span>
-                  <span class="arrive">准时达</span>
+                  <span class="arrive pull-right">准时达</span>
+                  <span class="send pull-right">蜂鸟专送</span>
                 </div>
                 <!--商品第三行-->
                 <div class="money">
                   <span>￥{{val.float_minimum_order_amount}}起送/配送费约￥{{val.float_delivery_fee}}</span>
-                  <span>{{val.distance}}/</span>
-                  <span>{{val.order_lead_time}}</span>
+                  <span class="pull-right">{{val.order_lead_time}}</span>
+                  <span class="pull-right">{{val.distance}}/</span>
                 </div>
               </div>
             </li>

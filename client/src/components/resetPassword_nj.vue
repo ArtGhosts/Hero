@@ -2,7 +2,9 @@
   <div class="nav">
     <!--密码登录-->
     <div class="topnj">
-      <router-link :to="{path:'/login'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/login'}">  <span class="pull-left">
+       <i class="iconfont" style="font-size: 1.5rem;color: white;padding-left: .5rem">&#xe60c;</i>
+        </span></router-link>
       <div class="denglu">
         重置密码
       </div>

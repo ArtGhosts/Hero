@@ -65,8 +65,8 @@ val.image_path" alt="">
               <!--商品第三行-->
               <div class="money">
                 <span>￥{{val.float_minimum_order_amount}}起送/配送费约￥{{val.float_delivery_fee}}</span>
-                <span>{{val.distance}}/</span>
-                <span>{{val.order_lead_time}}</span>
+                <span class="pull-right">{{val.order_lead_time}}</span>
+                <span class="pull-right">{{val.distance}}/</span>
               </div>
             </div>
           </li>

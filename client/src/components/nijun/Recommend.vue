@@ -2,7 +2,11 @@
   <div class="recommend">
     <!--蓝色头部-->
     <div class="topnj">
-      <router-link :to="{path:'/Hongbao'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/Hongbao'}">
+          <span class="pull-left">
+       <i class="iconfont" style="font-size: 1.5rem;color: white;padding-left: .5rem">&#xe60c;</i>
+        </span>
+      </router-link>
       <div class="denglu">
         推荐有奖
       </div>
@@ -11,7 +15,7 @@
 
     <!--内容-->
     <div style="width: 23.4rem;height: 15rem">
-      <img src="@/assets/imgs/activity.png" style="width: 100%;height: 100%"/>
+      <img src="../../assets/imgs/activity.png" style="width: 100%;height: 100%"/>
     </div>
     <div class="invite text-center" style="padding: 1rem 0;background: white;">
       <span @click="HideBox()">

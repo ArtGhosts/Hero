@@ -2,7 +2,11 @@
   <div style="height: 100%">
     <!--小兰头-->
     <div class="topnj">
-      <router-link :to="{path:'/Shop_Address'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/Shop_Address'}">
+         <span class="pull-left">
+       <i class="iconfont" style="font-size: 1.5rem;color: white;padding-left: .5rem">&#xe60c;</i>
+        </span>
+      </router-link>
       <div class="denglu">
         添加地址
       </div>
@@ -87,7 +91,7 @@
       },
       // 点击确认传递数据 , 增加收货地址
       under(){
-        let radio = parseInt(this.radio)
+        let radio = parseInt(this.radio);
         // console.log(this.geohash)
         Vue.axios.post(`https://elm.cangdu.org/v1/users/${this.UserId}/addresses`,{
           address:this.PathName,
@@ -155,6 +159,7 @@
   /*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
   .sexInput div{
     margin-top: 4.5rem;
+    margin-bottom: 14rem !important;
   }
   .Box input  {
     font-size: 0.7rem;
@@ -195,7 +200,7 @@
   }
   .sexInput{
     height: 2.5rem;
-    line-height: 2.5rem;
+    /*line-height: 2.5rem;*/
   }
 
   .nameInput{

@@ -4,7 +4,11 @@
   <div style="list-style: none;">
     <!--小兰头-->
     <div class="topnj">
-      <router-link :to="{path:'/Select_Address'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+      <router-link :to="{path:'/Select_Address'}">
+         <span class="pull-left">
+       <i class="iconfont" style="font-size: 1.5rem;color: white;padding-left: .5rem">&#xe60c;</i>
+        </span>
+      </router-link>
       <div class="denglu">
         搜索
       </div>

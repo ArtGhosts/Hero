@@ -93,6 +93,7 @@
       },
 
         created(){
+          this.name=this.$store.state.shopsInfor.userInfor;
           //获取当前城市
           Vue.axios.get("https://elm.cangdu.org/v1/cities?type=guess").then((result)=>{
             this.currentCity={name:result.data.name,id:result.data.id};

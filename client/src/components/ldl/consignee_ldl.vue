@@ -16,8 +16,8 @@
     <ul>
       <li v-for="(a,index) in Id" :key="index" class="li_ldl">
         <div class="li_div1_ldl">
-  <p >{{a.address_detail}}</p>
-  <span >{{a.phone}}</span>
+           <p>{{a.address_detail}}</p>
+            <span >{{a.phone}}</span>
         </div>
         <div  class="li_div2_ldl">
           <span @click="shanchu(a,index)" class="li_div2_span_ldl" v-show="C_show">X</span>

@@ -100,7 +100,7 @@
     data(){
       return{
         name:"",
-        hongbaocount:0,
+        hongbaocount:3,
       }
     },
     methods:{
@@ -116,7 +116,7 @@
       }
     },
     created(){
-      this.hongbaocount=localStorage["hongbaocount"];
+      // this.hongbaocount=localStorage["hongbaocount"];
       console.log( this.hongbaocount);
       this.name=this.$store.state.shopsInfor.userInfor;
       console.log(this.$store.state.shopsInfor.userInfor)

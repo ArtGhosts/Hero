@@ -98,7 +98,6 @@ import SearchCity_lgl_one from "@/components/ldl/SearchCity_lgl_one"
 //备注
 import beizhu from "@/components/ldl/beizhu"
 
-
 export default new Router({
   routes: [
     //首页

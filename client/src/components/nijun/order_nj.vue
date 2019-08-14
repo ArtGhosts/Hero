@@ -2,17 +2,16 @@
     <div class="order">
       <!--小兰头-->
       <div class="topnj">
-        <router-link :to="{path:'/mine'}"><span class="glyphicon glyphicon-menu-left pull-left back" style="color: white;"></span></router-link>
+        <router-link :to="{path:'/mine'}">
+         <span class="pull-left">
+       <i class="iconfont" style="font-size: 1.5rem;color: white;padding-left: .5rem">&#xe60c;</i>
+        </span>
+        </router-link>
         <div class="denglu">
           我的订单
         </div>
         <div class="clearfix"></div>
       </div>
-
-      <!--<div class="aa">-->
-        <!--<button class="btn" @click="HideBox()">去支付还剩0.00秒</button>-->
-        <!--<PromptBox v-show='isHide' :childCom="SetTxt" @childEvent="Show($event)"></PromptBox>-->
-      <!--</div>-->
       <div class="order">
         <!--订单信息-->
         <div class="indent" v-for="(pro,index) in allOrder" v-if="isShowAll">
@@ -39,22 +38,7 @@
   import Foot from "../../components/dyx/Foot_dyx"
   export default {
         name: "order_nj",
-    components:{PromptBox,Foot},
-    // data(){
-    //   return {
-    //     isHide:false,
-    //     SetTxt:'暂不开放支付接口'
-    //   }
-    // },
-    // methods: {
-    //   HideBox() {
-    //     this.isHide = true;
-    //   },
-    //   Show(e) {
-    //     this.isHide = e;
-    //   }
-    // }
-    // }
+    components:{Foot},
       data(){
         return{
           allOrder:[],
@@ -65,7 +49,7 @@
       //方法
       methods: {
         onClickLeft() {
-          this.$router.back(-1);
+          this.$router.go(-1);
         },
         ToOrderDetail(index){
           this.$store.commit("setDingDan",this.allOrder[index]);
